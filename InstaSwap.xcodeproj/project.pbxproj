@@ -3,19 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68F380BCC09443A22E5495BD /* Pods_InstaSwap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B43B78A8BD65AB1E6DFE99 /* Pods_InstaSwap.framework */; };
 		909537CB25615BA4007AF01C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CA25615BA4007AF01C /* AppDelegate.swift */; };
 		909537CD25615BA4007AF01C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CC25615BA4007AF01C /* SceneDelegate.swift */; };
 		909537CF25615BA4007AF01C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CE25615BA4007AF01C /* ContentView.swift */; };
 		909537D125615BA6007AF01C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909537D025615BA6007AF01C /* Assets.xcassets */; };
 		909537D425615BA6007AF01C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909537D325615BA6007AF01C /* Preview Assets.xcassets */; };
 		909537D725615BA6007AF01C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 909537D525615BA6007AF01C /* LaunchScreen.storyboard */; };
+		909537EC25615C19007AF01C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537E425615C19007AF01C /* LoginView.swift */; };
+		909537ED25615C19007AF01C /* MorphRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537E725615C19007AF01C /* MorphRectangle.swift */; };
+		909537EE25615C19007AF01C /* MorphingTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537E825615C19007AF01C /* MorphingTabBar.swift */; };
+		909537EF25615C19007AF01C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537E925615C19007AF01C /* Extensions.swift */; };
+		909537F025615C19007AF01C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537EA25615C19007AF01C /* LottieView.swift */; };
+		909537F125615C19007AF01C /* people.json in Resources */ = {isa = PBXBuildFile; fileRef = 909537EB25615C19007AF01C /* people.json */; };
+		909537F825615CF5007AF01C /* SwapsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537F725615CF5007AF01C /* SwapsTab.swift */; };
+		909537FC25615D1F007AF01C /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537FB25615D1F007AF01C /* SettingsTab.swift */; };
+		909537FF25615D31007AF01C /* RequestsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537FE25615D31007AF01C /* RequestsTab.swift */; };
+		9095380225616434007AF01C /* SwapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9095380125616434007AF01C /* SwapCard.swift */; };
+		909538062561671C007AF01C /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909538052561671B007AF01C /* Cards.swift */; };
+		9095380B256168E4007AF01C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9095380A256168E4007AF01C /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47B43B78A8BD65AB1E6DFE99 /* Pods_InstaSwap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaSwap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C89481CEDA670F35A633FE /* Pods-InstaSwap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaSwap.debug.xcconfig"; path = "Target Support Files/Pods-InstaSwap/Pods-InstaSwap.debug.xcconfig"; sourceTree = "<group>"; };
 		909537C725615BA4007AF01C /* InstaSwap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaSwap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		909537CA25615BA4007AF01C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		909537CC25615BA4007AF01C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +39,20 @@
 		909537D325615BA6007AF01C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		909537D625615BA6007AF01C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		909537D825615BA6007AF01C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		909537DF25615BBF007AF01C /* InstaSwap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InstaSwap.entitlements; sourceTree = "<group>"; };
+		909537E425615C19007AF01C /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		909537E725615C19007AF01C /* MorphRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphRectangle.swift; sourceTree = "<group>"; };
+		909537E825615C19007AF01C /* MorphingTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphingTabBar.swift; sourceTree = "<group>"; };
+		909537E925615C19007AF01C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		909537EA25615C19007AF01C /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		909537EB25615C19007AF01C /* people.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = people.json; sourceTree = "<group>"; };
+		909537F725615CF5007AF01C /* SwapsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapsTab.swift; sourceTree = "<group>"; };
+		909537FB25615D1F007AF01C /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		909537FE25615D31007AF01C /* RequestsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTab.swift; sourceTree = "<group>"; };
+		9095380125616434007AF01C /* SwapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapCard.swift; sourceTree = "<group>"; };
+		909538052561671B007AF01C /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
+		9095380A256168E4007AF01C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaSwap.release.xcconfig"; path = "Target Support Files/Pods-InstaSwap/Pods-InstaSwap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +60,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F380BCC09443A22E5495BD /* Pods_InstaSwap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BDD6BAB7EF0FAC0BAAB74D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47B43B78A8BD65AB1E6DFE99 /* Pods_InstaSwap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85D632097A68353A59C096A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79C89481CEDA670F35A633FE /* Pods-InstaSwap.debug.xcconfig */,
+				D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		909537BE25615BA4007AF01C = {
 			isa = PBXGroup;
 			children = (
 				909537C925615BA4007AF01C /* InstaSwap */,
 				909537C825615BA4007AF01C /* Products */,
+				85D632097A68353A59C096A1 /* Pods */,
+				1BDD6BAB7EF0FAC0BAAB74D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +105,11 @@
 		909537C925615BA4007AF01C /* InstaSwap */ = {
 			isa = PBXGroup;
 			children = (
+				90953809256168D7007AF01C /* ViewModels */,
+				909538042561670A007AF01C /* Models */,
+				909537E525615C19007AF01C /* Components */,
+				909537E325615C19007AF01C /* Views */,
+				909537DF25615BBF007AF01C /* InstaSwap.entitlements */,
 				909537CA25615BA4007AF01C /* AppDelegate.swift */,
 				909537CC25615BA4007AF01C /* SceneDelegate.swift */,
 				909537CE25615BA4007AF01C /* ContentView.swift */,
@@ -75,6 +129,62 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		909537E325615C19007AF01C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				909537F625615CDF007AF01C /* Tabs */,
+				909537E425615C19007AF01C /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		909537E525615C19007AF01C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				909537E625615C19007AF01C /* Tabbar */,
+				909537E925615C19007AF01C /* Extensions.swift */,
+				909537EA25615C19007AF01C /* LottieView.swift */,
+				909537EB25615C19007AF01C /* people.json */,
+				9095380125616434007AF01C /* SwapCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		909537E625615C19007AF01C /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				909537E725615C19007AF01C /* MorphRectangle.swift */,
+				909537E825615C19007AF01C /* MorphingTabBar.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		909537F625615CDF007AF01C /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				909537F725615CF5007AF01C /* SwapsTab.swift */,
+				909537FB25615D1F007AF01C /* SettingsTab.swift */,
+				909537FE25615D31007AF01C /* RequestsTab.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		909538042561670A007AF01C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				909538052561671B007AF01C /* Cards.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		90953809256168D7007AF01C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9095380A256168E4007AF01C /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +192,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 909537DB25615BA6007AF01C /* Build configuration list for PBXNativeTarget "InstaSwap" */;
 			buildPhases = (
+				145480E52DFB7327FCACED9D /* [CP] Check Pods Manifest.lock */,
 				909537C325615BA4007AF01C /* Sources */,
 				909537C425615BA4007AF01C /* Frameworks */,
 				909537C525615BA4007AF01C /* Resources */,
+				93D80F83EA1601AE3980790A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909537F125615C19007AF01C /* people.json in Resources */,
 				909537D725615BA6007AF01C /* LaunchScreen.storyboard in Resources */,
 				909537D425615BA6007AF01C /* Preview Assets.xcassets in Resources */,
 				909537D125615BA6007AF01C /* Assets.xcassets in Resources */,
@@ -140,14 +253,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		145480E52DFB7327FCACED9D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstaSwap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93D80F83EA1601AE3980790A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstaSwap/Pods-InstaSwap-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstaSwap/Pods-InstaSwap-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstaSwap/Pods-InstaSwap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		909537C325615BA4007AF01C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909537ED25615C19007AF01C /* MorphRectangle.swift in Sources */,
+				909538062561671C007AF01C /* Cards.swift in Sources */,
+				909537FF25615D31007AF01C /* RequestsTab.swift in Sources */,
+				9095380225616434007AF01C /* SwapCard.swift in Sources */,
 				909537CB25615BA4007AF01C /* AppDelegate.swift in Sources */,
+				909537FC25615D1F007AF01C /* SettingsTab.swift in Sources */,
+				9095380B256168E4007AF01C /* ViewModel.swift in Sources */,
 				909537CD25615BA4007AF01C /* SceneDelegate.swift in Sources */,
+				909537EC25615C19007AF01C /* LoginView.swift in Sources */,
 				909537CF25615BA4007AF01C /* ContentView.swift in Sources */,
+				909537EE25615C19007AF01C /* MorphingTabBar.swift in Sources */,
+				909537EF25615C19007AF01C /* Extensions.swift in Sources */,
+				909537F825615CF5007AF01C /* SwapsTab.swift in Sources */,
+				909537F025615C19007AF01C /* LottieView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -283,43 +449,55 @@
 		};
 		909537DC25615BA6007AF01C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C89481CEDA670F35A633FE /* Pods-InstaSwap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InstaSwap/InstaSwap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"InstaSwap/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstaSwap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaSwap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
 		909537DD25615BA6007AF01C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InstaSwap/InstaSwap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"InstaSwap/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstaSwap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaSwap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
