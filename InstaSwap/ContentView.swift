@@ -16,24 +16,34 @@ enum SelectedTab: Hashable {
 struct ContentView: View {
     
     @State var selectedTab: SelectedTab = .swaps
+    @State var isLoggedIn: Bool = false
     
     var body: some View {
-        TabView(selection: self.$selectedTab) {
-            RequestsTab()
-                .tabItem {
-                    Image(systemName: "person.badge.plus.fill")
-                        .renderingMode(.template)
-                }.tag(SelectedTab.requests)
-            SwapsTab()
-                .tabItem {
-                    Image(systemName: "rectangle.stack.person.crop.fill")
-                        .renderingMode(.template)
-                }.tag(SelectedTab.swaps)
-            SettingsTab()
-                .tabItem {
-                    Image(systemName: "gear")
-                        .renderingMode(.template)
-                }.tag(SelectedTab.settings)
+        ZStack{
+            if isLoggedIn{
+                TabView(selection: self.$selectedTab) {
+                    RequestsTab()
+                        .tabItem {
+                            Image(systemName: "person.badge.plus.fill")
+                                .renderingMode(.template)
+                            Text("Requests")
+                        }.tag(SelectedTab.requests)
+                    SwapsTab()
+                        .tabItem {
+                            Image(systemName: "rectangle.stack.person.crop.fill")
+                                .renderingMode(.template)
+                            Text("Swipes")
+                        }.tag(SelectedTab.swaps)
+                    SettingsTab()
+                        .tabItem {
+                            Image(systemName: "gear")
+                                .renderingMode(.template)
+                            Text("Settings")
+                        }.tag(SelectedTab.settings)
+                }
+            }else{
+                LoginView(sign: self.$isLoggedIn)
+            }
         }
     }
 }

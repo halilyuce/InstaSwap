@@ -18,7 +18,7 @@ struct SwapCard: View {
                 .scaledToFill()
                 .frame(maxWidth: UIScreen.main.bounds.width)
                 .clipped()
-            LinearGradient(gradient: Gradient(colors: [Color.pink,  Color.purple.opacity(0.5), Color.clear]), startPoint: .bottom, endPoint: .center)
+            LinearGradient(gradient: Gradient(colors: [Color.pink.opacity(0.5),  Color.purple.opacity(0.25), Color.clear]), startPoint: .bottom, endPoint: .center)
             if person.images.count > 1{
                 HStack{
                     ForEach(0..<person.images.count){ i in

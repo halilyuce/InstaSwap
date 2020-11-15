@@ -255,3 +255,20 @@ extension View{
         }
     }
 }
+
+struct GroupedListModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        Group {
+            if #available(iOS 14, *) {
+                AnyView(
+                    content
+                        .listStyle(InsetGroupedListStyle())
+                )
+            } else {
+                content
+                    .listStyle(GroupedListStyle())
+                    .environment(\.horizontalSizeClass, .regular)
+            }
+        }
+    }
+}

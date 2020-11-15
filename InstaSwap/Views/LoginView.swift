@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    
+    @Binding var sign: Bool
+    
         var body: some View {
             VStack{
                 ZStack(alignment: .top){
@@ -36,7 +39,7 @@ struct LoginView: View {
                         .padding(.horizontal, 40)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
-                    Button(action: {}, label: {
+                    Button(action: {self.sign.toggle()}, label: {
                         Text("Sign with Instagram")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -55,7 +58,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(sign: .constant(false))
             .preferredColorScheme(.dark)
             .previewDevice("iPhone 12 Pro")
     }

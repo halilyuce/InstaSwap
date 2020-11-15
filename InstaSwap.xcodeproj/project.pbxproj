@@ -26,6 +26,7 @@
 		9095380225616434007AF01C /* SwapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9095380125616434007AF01C /* SwapCard.swift */; };
 		909538062561671C007AF01C /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909538052561671B007AF01C /* Cards.swift */; };
 		9095380B256168E4007AF01C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9095380A256168E4007AF01C /* ViewModel.swift */; };
+		90C9D0532561C3BB0095823F /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C9D0522561C3BB0095823F /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		9095380125616434007AF01C /* SwapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapCard.swift; sourceTree = "<group>"; };
 		909538052561671B007AF01C /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		9095380A256168E4007AF01C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		90C9D0522561C3BB0095823F /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaSwap.release.xcconfig"; path = "Target Support Files/Pods-InstaSwap/Pods-InstaSwap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 				909537EA25615C19007AF01C /* LottieView.swift */,
 				909537EB25615C19007AF01C /* people.json */,
 				9095380125616434007AF01C /* SwapCard.swift */,
+				90C9D0522561C3BB0095823F /* SafariView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				909538062561671C007AF01C /* Cards.swift in Sources */,
 				909537FF25615D31007AF01C /* RequestsTab.swift in Sources */,
 				9095380225616434007AF01C /* SwapCard.swift in Sources */,
+				90C9D0532561C3BB0095823F /* SafariView.swift in Sources */,
 				909537CB25615BA4007AF01C /* AppDelegate.swift in Sources */,
 				909537FC25615D1F007AF01C /* SettingsTab.swift in Sources */,
 				9095380B256168E4007AF01C /* ViewModel.swift in Sources */,
@@ -465,7 +469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaSwap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -492,7 +496,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaSwap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
