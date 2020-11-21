@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct WelcomeView: View {
     
     @Binding var sign: Bool
     
-        var body: some View {
+    var body: some View {
+        NavigationView{
             VStack{
                 ZStack(alignment: .top){
                     Rectangle()
                         .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
                         .frame(maxWidth: .infinity)
-                        .frame(height: UIScreen.main.bounds.height / 1.85, alignment: .center)
+                        .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
                     LottieView(name: "people", loop: true)
                         .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
                         .padding(.horizontal)
@@ -27,7 +28,7 @@ struct LoginView: View {
                 .clipShape(CustomShape())
                 .scaleEffect(CGSize(width: 1.0, height: -1.0))
                 VStack{
-                    Text("InstaSwap")
+                    Text("InstaMatch")
                         .fontWeight(.bold)
                         .padding(.horizontal, 25)
                         .padding(.vertical, 20)
@@ -39,8 +40,8 @@ struct LoginView: View {
                         .padding(.horizontal, 40)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
-                    Button(action: {self.sign.toggle()}, label: {
-                        Text("Sign with Instagram")
+                    NavigationLink(destination: RegisterView()){
+                        Text("Register")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width / 1.5)
@@ -48,17 +49,28 @@ struct LoginView: View {
                             .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
                             .cornerRadius(6)
                             .padding(25)
-                    })
+                    }
+                    NavigationLink(destination: LoginView()){
+                        HStack{
+                            Text("Already have an account?")
+                                .foregroundColor(.gray)
+                            Text("Login here")
+                                .foregroundColor(.pink)
+                                .underline()
+                        }
+                    }
                 }
                 .frame(height: UIScreen.main.bounds.height / 2.5, alignment: .center)
                 Spacer()
             }.edgesIgnoringSafeArea(.top)
-        }
+            .navigationBarHidden(true)
+        }.accentColor(Color(UIColor(named: "Light")!))
     }
+}
 
-struct LoginView_Previews: PreviewProvider {
+struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(sign: .constant(false))
+        WelcomeView(sign: .constant(false))
             .preferredColorScheme(.dark)
             .previewDevice("iPhone 12 Pro")
     }

@@ -42,7 +42,7 @@ struct ContentView: View {
                         }.tag(SelectedTab.settings)
                 }
             }else{
-                LoginView(sign: self.$isLoggedIn)
+                WelcomeView(sign: self.$isLoggedIn)
             }
         }
     }
