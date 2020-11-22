@@ -42,7 +42,11 @@ struct ContentView: View {
                         }.tag(SelectedTab.settings)
                 }
             }else{
-                WelcomeView(sign: self.$isLoggedIn)
+                if #available(iOS 14.0, *) {
+                    PhotosView()
+                }else{
+                    WelcomeView(sign: self.$isLoggedIn)
+                }
             }
         }
     }
