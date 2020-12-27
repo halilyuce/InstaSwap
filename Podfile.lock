@@ -1,16 +1,51 @@
 PODS:
+  - Bagel (1.4.0):
+    - CocoaAsyncSocket
+  - CocoaAsyncSocket (7.6.4)
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
+    - libwebp/webp
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
   - lottie-ios (3.1.8)
+  - SDWebImage (5.10.0):
+    - SDWebImage/Core (= 5.10.0)
+  - SDWebImage/Core (5.10.0)
+  - SDWebImageSwiftUI (1.5.0):
+    - SDWebImage (~> 5.7)
+  - SDWebImageWebPCoder (0.7.0):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
 
 DEPENDENCIES:
+  - Bagel
   - lottie-ios
+  - SDWebImageSwiftUI
+  - SDWebImageWebPCoder
 
 SPEC REPOS:
   trunk:
+    - Bagel
+    - CocoaAsyncSocket
+    - libwebp
     - lottie-ios
+    - SDWebImage
+    - SDWebImageSwiftUI
+    - SDWebImageWebPCoder
 
 SPEC CHECKSUMS:
+  Bagel: c3fa6bcbd52db9ca976edbafd7638f0553ded101
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  SDWebImageSwiftUI: 43687ffe232ddd33fe0659498b7ca9884fdd6b35
+  SDWebImageWebPCoder: c359317c2e7cfec85d7ea137521c7a36ed239674
 
-PODFILE CHECKSUM: 0bd12dd5e487fa4cc3ed2626573e53c3edc2194b
+PODFILE CHECKSUM: a997779e75adf3c99104ee8f00964fb0b438b8f9
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.0

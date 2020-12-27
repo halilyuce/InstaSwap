@@ -66,13 +66,13 @@ struct SettingsTab: View {
                 Section(header: HStack{
                     Image(systemName: "rectangle.stack.person.crop")
                         .foregroundColor(.accentColor)
-                    Text("About InstaMatch")
-                }, footer: Text("InstaMatch is made by Labters Inc. - United Kingdom")) {
+                    Text("About InstantMatch")
+                }, footer: Text("InstantMatch is made by Labters Inc. - United Kingdom")) {
                     Toggle(isOn: $notify) {
                         Text("Notifications")
                     }
                     HStack{
-                        Text("Rate InstaMatch")
+                        Text("Rate InstantMatch")
                         Spacer()
                     }.onTapGesture {
                         if #available(iOS 14.0, *) {

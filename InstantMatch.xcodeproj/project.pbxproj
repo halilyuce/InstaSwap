@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E83C337478C6EEDFF890245 /* Pods_InstaMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59AF59AAED45CBE3B86CA957 /* Pods_InstaMatch.framework */; };
+		4882888C29D6D65C199C4E13 /* Pods_InstantMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75974161026801FC7CFD914 /* Pods_InstantMatch.framework */; };
+		90710D042598DFDA008CA77B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D032598DFDA008CA77B /* HTTPManager.swift */; };
+		90710D072598E01B008CA77B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D062598E01B008CA77B /* APIManager.swift */; };
+		90710D0A2598E168008CA77B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D092598E168008CA77B /* Login.swift */; };
 		909537CB25615BA4007AF01C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CA25615BA4007AF01C /* AppDelegate.swift */; };
 		909537CD25615BA4007AF01C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CC25615BA4007AF01C /* SceneDelegate.swift */; };
 		909537CF25615BA4007AF01C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909537CE25615BA4007AF01C /* ContentView.swift */; };
@@ -37,10 +40,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		59AF59AAED45CBE3B86CA957 /* Pods_InstaMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BED94D87A664CD160C86DE1 /* Pods-InstaMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaMatch.debug.xcconfig"; path = "Target Support Files/Pods-InstaMatch/Pods-InstaMatch.debug.xcconfig"; sourceTree = "<group>"; };
-		79C89481CEDA670F35A633FE /* Pods-InstaSwap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaSwap.debug.xcconfig"; path = "Target Support Files/Pods-InstaSwap/Pods-InstaSwap.debug.xcconfig"; sourceTree = "<group>"; };
-		909537C725615BA4007AF01C /* InstaMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A826C7266847B58BC73B8F3 /* Pods-InstantMatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantMatch.release.xcconfig"; path = "Target Support Files/Pods-InstantMatch/Pods-InstantMatch.release.xcconfig"; sourceTree = "<group>"; };
+		47CFFA7F1473A99B80AB775E /* Pods-InstantMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstantMatch.debug.xcconfig"; path = "Target Support Files/Pods-InstantMatch/Pods-InstantMatch.debug.xcconfig"; sourceTree = "<group>"; };
+		90710D032598DFDA008CA77B /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
+		90710D062598E01B008CA77B /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		90710D092598E168008CA77B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		909537C725615BA4007AF01C /* InstantMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstantMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		909537CA25615BA4007AF01C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		909537CC25615BA4007AF01C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		909537CE25615BA4007AF01C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,7 +53,7 @@
 		909537D325615BA6007AF01C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		909537D625615BA6007AF01C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		909537D825615BA6007AF01C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		909537DF25615BBF007AF01C /* InstaMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InstaMatch.entitlements; sourceTree = "<group>"; };
+		909537DF25615BBF007AF01C /* InstantMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InstantMatch.entitlements; sourceTree = "<group>"; };
 		909537E425615C19007AF01C /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		909537E725615C19007AF01C /* MorphRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphRectangle.swift; sourceTree = "<group>"; };
 		909537E825615C19007AF01C /* MorphingTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphingTabBar.swift; sourceTree = "<group>"; };
@@ -69,8 +74,7 @@
 		90F065B42569A45B00055F66 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		90F065B72569BD0E00055F66 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		90F065BA2569BF5400055F66 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		BF54D1AD706DA07822A5BA09 /* Pods-InstaMatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaMatch.release.xcconfig"; path = "Target Support Files/Pods-InstaMatch/Pods-InstaMatch.release.xcconfig"; sourceTree = "<group>"; };
-		D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaSwap.release.xcconfig"; path = "Target Support Files/Pods-InstaSwap/Pods-InstaSwap.release.xcconfig"; sourceTree = "<group>"; };
+		E75974161026801FC7CFD914 /* Pods_InstantMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstantMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,17 +82,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E83C337478C6EEDFF890245 /* Pods_InstaMatch.framework in Frameworks */,
+				4882888C29D6D65C199C4E13 /* Pods_InstantMatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1BDD6BAB7EF0FAC0BAAB74D6 /* Frameworks */ = {
+		815C68194C572410B52C5263 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				59AF59AAED45CBE3B86CA957 /* Pods_InstaMatch.framework */,
+				E75974161026801FC7CFD914 /* Pods_InstantMatch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,40 +100,48 @@
 		85D632097A68353A59C096A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				79C89481CEDA670F35A633FE /* Pods-InstaSwap.debug.xcconfig */,
-				D74B98F4F06734BAC037E76C /* Pods-InstaSwap.release.xcconfig */,
-				5BED94D87A664CD160C86DE1 /* Pods-InstaMatch.debug.xcconfig */,
-				BF54D1AD706DA07822A5BA09 /* Pods-InstaMatch.release.xcconfig */,
+				47CFFA7F1473A99B80AB775E /* Pods-InstantMatch.debug.xcconfig */,
+				1A826C7266847B58BC73B8F3 /* Pods-InstantMatch.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		90710D022598DFA1008CA77B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				90710D032598DFDA008CA77B /* HTTPManager.swift */,
+				90710D062598E01B008CA77B /* APIManager.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		909537BE25615BA4007AF01C = {
 			isa = PBXGroup;
 			children = (
-				909537C925615BA4007AF01C /* InstaMatch */,
+				909537C925615BA4007AF01C /* InstantMatch */,
 				909537C825615BA4007AF01C /* Products */,
 				85D632097A68353A59C096A1 /* Pods */,
-				1BDD6BAB7EF0FAC0BAAB74D6 /* Frameworks */,
+				815C68194C572410B52C5263 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		909537C825615BA4007AF01C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				909537C725615BA4007AF01C /* InstaMatch.app */,
+				909537C725615BA4007AF01C /* InstantMatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		909537C925615BA4007AF01C /* InstaMatch */ = {
+		909537C925615BA4007AF01C /* InstantMatch */ = {
 			isa = PBXGroup;
 			children = (
+				90710D022598DFA1008CA77B /* API */,
 				90953809256168D7007AF01C /* ViewModels */,
 				909538042561670A007AF01C /* Models */,
 				909537E525615C19007AF01C /* Components */,
 				909537E325615C19007AF01C /* Views */,
-				909537DF25615BBF007AF01C /* InstaMatch.entitlements */,
+				909537DF25615BBF007AF01C /* InstantMatch.entitlements */,
 				909537CA25615BA4007AF01C /* AppDelegate.swift */,
 				909537CC25615BA4007AF01C /* SceneDelegate.swift */,
 				909537CE25615BA4007AF01C /* ContentView.swift */,
@@ -138,7 +150,7 @@
 				909537D825615BA6007AF01C /* Info.plist */,
 				909537D225615BA6007AF01C /* Preview Content */,
 			);
-			path = InstaMatch;
+			path = InstantMatch;
 			sourceTree = "<group>";
 		};
 		909537D225615BA6007AF01C /* Preview Content */ = {
@@ -197,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				909538052561671B007AF01C /* Cards.swift */,
+				90710D092598E168008CA77B /* Login.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,23 +237,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		909537C625615BA4007AF01C /* InstaMatch */ = {
+		909537C625615BA4007AF01C /* InstantMatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 909537DB25615BA6007AF01C /* Build configuration list for PBXNativeTarget "InstaMatch" */;
+			buildConfigurationList = 909537DB25615BA6007AF01C /* Build configuration list for PBXNativeTarget "InstantMatch" */;
 			buildPhases = (
-				145480E52DFB7327FCACED9D /* [CP] Check Pods Manifest.lock */,
+				C18B58C2832D040B50C61610 /* [CP] Check Pods Manifest.lock */,
 				909537C325615BA4007AF01C /* Sources */,
 				909537C425615BA4007AF01C /* Frameworks */,
 				909537C525615BA4007AF01C /* Resources */,
-				93D80F83EA1601AE3980790A /* [CP] Embed Pods Frameworks */,
+				7353FA3C5C1915448FD2A2DF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = InstaMatch;
+			name = InstantMatch;
 			productName = InstaSwap;
-			productReference = 909537C725615BA4007AF01C /* InstaMatch.app */;
+			productReference = 909537C725615BA4007AF01C /* InstantMatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -257,7 +270,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 909537C225615BA4007AF01C /* Build configuration list for PBXProject "InstaMatch" */;
+			buildConfigurationList = 909537C225615BA4007AF01C /* Build configuration list for PBXProject "InstantMatch" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -270,7 +283,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				909537C625615BA4007AF01C /* InstaMatch */,
+				909537C625615BA4007AF01C /* InstantMatch */,
 			);
 		};
 /* End PBXProject section */
@@ -291,7 +304,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		145480E52DFB7327FCACED9D /* [CP] Check Pods Manifest.lock */ = {
+		7353FA3C5C1915448FD2A2DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstantMatch/Pods-InstantMatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstantMatch/Pods-InstantMatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstantMatch/Pods-InstantMatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C18B58C2832D040B50C61610 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -306,28 +336,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-InstaMatch-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-InstantMatch-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		93D80F83EA1601AE3980790A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InstaMatch/Pods-InstaMatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InstaMatch/Pods-InstaMatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstaMatch/Pods-InstaMatch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -352,10 +365,13 @@
 				9095380B256168E4007AF01C /* ViewModel.swift in Sources */,
 				909537CD25615BA4007AF01C /* SceneDelegate.swift in Sources */,
 				909537EC25615C19007AF01C /* WelcomeView.swift in Sources */,
+				90710D0A2598E168008CA77B /* Login.swift in Sources */,
 				909537CF25615BA4007AF01C /* ContentView.swift in Sources */,
 				909537EE25615C19007AF01C /* MorphingTabBar.swift in Sources */,
 				909537EF25615C19007AF01C /* Extensions.swift in Sources */,
 				909537F825615CF5007AF01C /* SwapsTab.swift in Sources */,
+				90710D042598DFDA008CA77B /* HTTPManager.swift in Sources */,
+				90710D072598E01B008CA77B /* APIManager.swift in Sources */,
 				90F0659525699DDB00055F66 /* LoginView.swift in Sources */,
 				909537F025615C19007AF01C /* LottieView.swift in Sources */,
 			);
@@ -493,23 +509,23 @@
 		};
 		909537DC25615BA6007AF01C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BED94D87A664CD160C86DE1 /* Pods-InstaMatch.debug.xcconfig */;
+			baseConfigurationReference = 47CFFA7F1473A99B80AB775E /* Pods-InstantMatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = InstaMatch/InstaMatch.entitlements;
+				CODE_SIGN_ENTITLEMENTS = InstantMatch/InstantMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"InstaMatch/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"InstantMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = InstaMatch/Info.plist;
+				INFOPLIST_FILE = InstantMatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaMatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstantMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -520,23 +536,23 @@
 		};
 		909537DD25615BA6007AF01C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF54D1AD706DA07822A5BA09 /* Pods-InstaMatch.release.xcconfig */;
+			baseConfigurationReference = 1A826C7266847B58BC73B8F3 /* Pods-InstantMatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = InstaMatch/InstaMatch.entitlements;
+				CODE_SIGN_ENTITLEMENTS = InstantMatch/InstantMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"InstaMatch/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"InstantMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = InstaMatch/Info.plist;
+				INFOPLIST_FILE = InstantMatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstaMatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstantMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -548,7 +564,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		909537C225615BA4007AF01C /* Build configuration list for PBXProject "InstaMatch" */ = {
+		909537C225615BA4007AF01C /* Build configuration list for PBXProject "InstantMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				909537D925615BA6007AF01C /* Debug */,
@@ -557,7 +573,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		909537DB25615BA6007AF01C /* Build configuration list for PBXNativeTarget "InstaMatch" */ = {
+		909537DB25615BA6007AF01C /* Build configuration list for PBXNativeTarget "InstantMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				909537DC25615BA6007AF01C /* Debug */,

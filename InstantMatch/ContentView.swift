@@ -16,11 +16,12 @@ enum SelectedTab: Hashable {
 struct ContentView: View {
     
     @State var selectedTab: SelectedTab = .swaps
-    @State var isLoggedIn: Bool = false
+    @State var authVM: AuthVM = .shared
+    @State var token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
     
     var body: some View {
         ZStack{
-            if isLoggedIn{
+            if token != "" || authVM.loggedIn{
                 TabView(selection: self.$selectedTab) {
                     RequestsTab()
                         .tabItem {
@@ -42,11 +43,7 @@ struct ContentView: View {
                         }.tag(SelectedTab.settings)
                 }
             }else{
-                if #available(iOS 14.0, *) {
-                    PhotosView()
-                }else{
-                    WelcomeView(sign: self.$isLoggedIn)
-                }
+                WelcomeView(sign: self.$authVM.loggedIn)
             }
         }
     }
