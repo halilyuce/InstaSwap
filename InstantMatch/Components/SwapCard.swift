@@ -6,24 +6,25 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SwapCard: View {
     
     @State var person: Card
+    @ObservedObject var viewModel: ViewModel = .shared
     
     var body: some View {
         ZStack(alignment: .top){
-            Image(person.images[person.index])
-                .resizable()
-                .scaledToFill()
-                .frame(maxWidth: UIScreen.main.bounds.width)
-                .clipped()
+            if person.images?.count ?? 0 > 0 {
+            LazyImage(url: URL(string: person.images?[person.index ?? 0] ?? "")!)
+                .equatable()
+            }
             LinearGradient(gradient: Gradient(colors: [Color.pink.opacity(0.5),  Color.purple.opacity(0.25), Color.clear]), startPoint: .bottom, endPoint: .center)
-            if person.images.count > 1{
+            if person.images?.count ?? 0 > 1{
                 HStack{
-                    ForEach(0..<person.images.count){ i in
+                    ForEach(0..<person.images!.count){ i in
                         RoundedRectangle(cornerRadius: 2)
-                            .fill(Color.white.opacity(person.index == i ? 1.0 : 0.5))
+                            .fill(Color.white.opacity(person.index ?? 0 == i ? 1.0 : 0.5))
                             .frame(height:3)
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 3)
@@ -36,23 +37,19 @@ struct SwapCard: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width:150)
-                        .opacity(Double(person.x/10 - 1))
+                        .opacity(Double((person.x ?? 0)/10 - 1))
                     Spacer()
                     Image("nope")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width:150)
-                        .opacity(Double(person.x/10 * -1 - 1))
+                        .opacity(Double((person.x ?? 0)/10 * -1 - 1))
                 }
                 Spacer()
                 HStack{
-                    VStack(alignment: .leading, spacing: 5){
-                        Text("\(person.name), \(person.age)")
+                    Text("\(person.name ?? ""), \(birth(date: person.birthDate ?? ""))")
                             .font(.title)
                             .fontWeight(.bold)
-                        Text(person.country)
-                            .fontWeight(.bold)
-                    }
                     Spacer()
                     Button(action: {}, label: {
                         Image(systemName: "flag.fill")
@@ -63,8 +60,8 @@ struct SwapCard: View {
                 LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.clear]), startPoint: .leading, endPoint: .trailing)
                     .frame(width: 100)
                     .onTapGesture {
-                        if person.index > 0{
-                            person.index -= 1
+                        if person.index ?? 0 > 0{
+                            person.index! -= 1
                         }
                     }
                 Spacer()
@@ -72,15 +69,17 @@ struct SwapCard: View {
                     .frame(width: 100)
                     .opacity(0.01)
                     .onTapGesture {
-                        if person.index < person.images.count - 1{
-                            person.index += 1
+                        if person.index ?? 0 < (person.images?.count ?? 0) - 1{
+                            person.index! += 1
                         }
                     }
             }.frame(maxWidth: UIScreen.main.bounds.width)
+        }.onAppear(){
+            person.index = 0
         }
         .frame(maxWidth: UIScreen.main.bounds.width)
-        .offset(x: person.x, y: person.y)
-        .rotationEffect(.init(degrees: person.degree))
+        .offset(x: person.x ?? 0, y: person.y ?? 0)
+        .rotationEffect(.init(degrees: person.degree ?? 0))
         .gesture (
             DragGesture()
                 .onChanged { value in
@@ -96,11 +95,21 @@ struct SwapCard: View {
                         case 0...100:
                             person.x = 0; person.degree = 0; person.y = 0
                         case let x where x > 100:
+                            print("Swipe Right")
+                            self.viewModel.postSwipe(id: person._id ?? "", liked: true)
                             person.x = (UIScreen.main.bounds.width * 2); person.degree = 12
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                self.viewModel.cards.remove(at: 0)
+                            }
                         case (-100)...(-1):
                             person.x = 0; person.degree = 0; person.y = 0
                         case let x where x < -100:
+                            print("Swipe Left")
+                            self.viewModel.postSwipe(id: person._id ?? "", liked: false)
                             person.x  = -(UIScreen.main.bounds.width * 2); person.degree = -12
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                self.viewModel.cards.remove(at: 0)
+                            }
                         default:
                             person.x = 0; person.y = 0
                         }
@@ -108,11 +117,18 @@ struct SwapCard: View {
                 }
         )
     }
+    
+    func birth(date: String) -> String{
+        let ageComponents = Calendar.current.dateComponents([.year], from: date.toDateNodeTS(), to: Date())
+        return String(ageComponents.year!)
+    }
 }
 
 struct SwapCard_Previews: PreviewProvider {
     static var previews: some View {
-        SwapCard(person: Card(id:1, name: "Rosie", country: "USA", images: ["gigi", "hadid", "gigihadid"], age: 21, bio: "Insta - roooox 💋"))
+        SwapCard(person: Card(images: ["https://i.pinimg.com/originals/95/86/bf/9586bfc989985ce947a687e43da3d419.jpg",
+                                       "https://cf.girlsaskguys.com/a26913/276aa246-a97e-4a8f-b0fa-7ecc17f3185e.jpg",
+                                       "https://placeimg.com/768/1024/people"], _id: "5fe8cf814ef1445812360b51", username: "rosie34", name: "Rosie", email: "torrey.heller98@hotmail.com", birthDate: "1999-08-03T04:48:14.714Z", gender: 1, lookingFor: 0))
             .previewDevice("iPhone 12 Pro")
     }
 }

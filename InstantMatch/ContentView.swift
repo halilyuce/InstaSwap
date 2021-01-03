@@ -16,12 +16,12 @@ enum SelectedTab: Hashable {
 struct ContentView: View {
     
     @State var selectedTab: SelectedTab = .swaps
-    @State var authVM: AuthVM = .shared
+    @ObservedObject var authVM: AuthVM = .shared
     @State var token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
     
     var body: some View {
         ZStack{
-            if token != "" || authVM.loggedIn{
+            if !token.isEmpty || authVM.loggedIn {
                 TabView(selection: self.$selectedTab) {
                     RequestsTab()
                         .tabItem {

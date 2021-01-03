@@ -32,6 +32,9 @@
 		90C9D0532561C3BB0095823F /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C9D0522561C3BB0095823F /* SafariView.swift */; };
 		90D10806256A7A77006F596A /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D10805256A7A77006F596A /* PhotosView.swift */; };
 		90D10809256AB366006F596A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D10808256AB366006F596A /* ImagePicker.swift */; };
+		90D1350D25A1EA8C00D6D76A /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1350C25A1EA8C00D6D76A /* CustomError.swift */; };
+		90D1351125A1F65E00D6D76A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1351025A1F65E00D6D76A /* ActivityIndicator.swift */; };
+		90D1351425A2451F00D6D76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1351325A2451F00D6D76A /* Notification.swift */; };
 		90F0659525699DDB00055F66 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0659425699DDB00055F66 /* LoginView.swift */; };
 		90F065AE2569A24400055F66 /* AuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F065AD2569A24400055F66 /* AuthVM.swift */; };
 		90F065B52569A45B00055F66 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 90F065B42569A45B00055F66 /* login.json */; };
@@ -69,6 +72,9 @@
 		90C9D0522561C3BB0095823F /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		90D10805256A7A77006F596A /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		90D10808256AB366006F596A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		90D1350C25A1EA8C00D6D76A /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		90D1351025A1F65E00D6D76A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		90D1351325A2451F00D6D76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		90F0659425699DDB00055F66 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		90F065AD2569A24400055F66 /* AuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVM.swift; sourceTree = "<group>"; };
 		90F065B42569A45B00055F66 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 				90C9D0522561C3BB0095823F /* SafariView.swift */,
 				90F065B72569BD0E00055F66 /* KeyboardHelper.swift */,
 				90D10808256AB366006F596A /* ImagePicker.swift */,
+				90D1351025A1F65E00D6D76A /* ActivityIndicator.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -210,6 +217,8 @@
 			children = (
 				909538052561671B007AF01C /* Cards.swift */,
 				90710D092598E168008CA77B /* Login.swift */,
+				90D1350C25A1EA8C00D6D76A /* CustomError.swift */,
+				90D1351325A2451F00D6D76A /* Notification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -354,6 +363,7 @@
 				909538062561671C007AF01C /* Cards.swift in Sources */,
 				909537FF25615D31007AF01C /* RequestsTab.swift in Sources */,
 				90D10809256AB366006F596A /* ImagePicker.swift in Sources */,
+				90D1351125A1F65E00D6D76A /* ActivityIndicator.swift in Sources */,
 				9095380225616434007AF01C /* SwapCard.swift in Sources */,
 				90C9D0532561C3BB0095823F /* SafariView.swift in Sources */,
 				909537CB25615BA4007AF01C /* AppDelegate.swift in Sources */,
@@ -366,8 +376,10 @@
 				909537CD25615BA4007AF01C /* SceneDelegate.swift in Sources */,
 				909537EC25615C19007AF01C /* WelcomeView.swift in Sources */,
 				90710D0A2598E168008CA77B /* Login.swift in Sources */,
+				90D1350D25A1EA8C00D6D76A /* CustomError.swift in Sources */,
 				909537CF25615BA4007AF01C /* ContentView.swift in Sources */,
 				909537EE25615C19007AF01C /* MorphingTabBar.swift in Sources */,
+				90D1351425A2451F00D6D76A /* Notification.swift in Sources */,
 				909537EF25615C19007AF01C /* Extensions.swift in Sources */,
 				909537F825615CF5007AF01C /* SwapsTab.swift in Sources */,
 				90710D042598DFDA008CA77B /* HTTPManager.swift in Sources */,
@@ -520,17 +532,16 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstantMatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstantMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -547,17 +558,16 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = InstantMatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.labters.InstantMatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

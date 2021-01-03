@@ -24,6 +24,7 @@ struct RegisterView: View{
                     .fixedSize(horizontal: false, vertical: true)
                 TextField("Instagram Username", text: self.$authVM.register_username)
                     .padding(12)
+                    .autocapitalization(.none)
                     .background(Color(UIColor.systemGray6))
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
@@ -36,6 +37,8 @@ struct RegisterView: View{
                     .padding(.bottom, 10)
                 TextField("E-mail", text: self.$authVM.register_email)
                     .padding(12)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
                     .background(Color(UIColor.systemGray6))
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
@@ -74,23 +77,30 @@ struct RegisterView: View{
                     .pickerStyle(SegmentedPickerStyle())
                 }.padding(.horizontal, 30).padding(.top, 10).padding(.bottom, 30)
                 Button(action: {
-                    let instagram = URL(string: "instagram://user?username=halilyc")!
-                        if UIApplication.shared.canOpenURL(instagram) {
-                                UIApplication.shared.open(instagram, completionHandler: nil)
-                            } else {
-                                print("Instagram not installed")
-                        }
+                    self.authVM.register()
                 }, label: {
-                    Text("Register Now")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50, alignment: .center)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                        .cornerRadius(6)
-                        .padding(.horizontal, 30)
-                        .padding(.bottom, 25)
-                })
+                    if self.authVM.status == .loading{
+                        ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                            .cornerRadius(6)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 25)
+                    }else{
+                        Text("Register Now")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                            .cornerRadius(6)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 25)
+                            .opacity(checkForm() ? 0.5 : 1.0)
+                    }
+                }).disabled(checkForm())
                 NavigationLink(destination: LoginView()){
                     HStack{
                         Text("Don't you have an account?")
@@ -123,5 +133,19 @@ struct RegisterView: View{
             }
         }.edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
+        .alert(isPresented: .constant(authVM.error && authVM.errorType == "Register")) {
+            Alert(title: Text("An error occured"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
+                Text("I got it"), action: { self.authVM.error = false }
+            ))
+        }
     }
+    
+    func checkForm() -> Bool {
+        if self.authVM.register_name.isEmpty || self.authVM.register_email.isEmpty || self.authVM.register_username.isEmpty || self.authVM.register_password.isEmpty {
+            return true
+        }else{
+            return false
+        }
+    }
+    
 }

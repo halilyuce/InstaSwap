@@ -9,9 +9,11 @@ import SwiftUI
 import StoreKit
 
 struct SettingsTab: View {
-    
+
+    @State var user: User? = try? UserDefaults.standard.customObject(forKey: "user")
     @State var selection: Int? = nil
     @State private var notify = true
+    @ObservedObject var authVM: AuthVM = .shared
     
     var body: some View {
         NavigationView{
@@ -26,7 +28,7 @@ struct SettingsTab: View {
                         HStack{
                             Text("Name")
                             Spacer()
-                            Text("Halil Yüce")
+                            Text(user?.name ?? "")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -34,7 +36,7 @@ struct SettingsTab: View {
                         HStack{
                             Text("Gender")
                             Spacer()
-                            Text("Male")
+                            Text(user?.gender == 0 ? "Male" : user?.gender == 1 ? "Female" : "Other")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -50,7 +52,7 @@ struct SettingsTab: View {
                         HStack{
                             Text("Birthday")
                             Spacer()
-                            Text("18 May 1993")
+                            Text(user?.birthDate?.toDateNodeTS().toString() ?? "")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -96,7 +98,9 @@ struct SettingsTab: View {
                     Text("Account Actions")
                 }) {
                     HStack{
-                        Button(action:{}){
+                        Button(action:{
+                            self.authVM.logOut()
+                        }){
                             Text("Logout")
                         }
                         Spacer()

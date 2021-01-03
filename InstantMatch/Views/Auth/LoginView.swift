@@ -36,6 +36,8 @@ struct LoginView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     TextField("E-mail", text: self.$authVM.email)
                         .padding(12)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
                         .background(Color(UIColor.systemGray6))
                         .mask(RoundedRectangle(cornerRadius: 8))
                         .padding(.horizontal, 30)
@@ -47,18 +49,30 @@ struct LoginView: View {
                         .padding(.horizontal, 30)
                         .padding(.bottom, 25)
                     Button(action: {
-                        self.authVM.login(email: authVM.email, password: authVM.password)
+                        self.authVM.login()
                     }, label: {
-                        Text("Login")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50, alignment: .center)
-                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                            .cornerRadius(6)
-                            .padding(.horizontal, 30)
-                            .padding(.bottom, 25)
-                    })
+                        if self.authVM.status == .loading{
+                            ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50, alignment: .center)
+                                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                                .cornerRadius(6)
+                                .padding(.horizontal, 30)
+                                .padding(.bottom, 25)
+                        }else{
+                            Text("Login")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50, alignment: .center)
+                                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                                .cornerRadius(6)
+                                .padding(.horizontal, 30)
+                                .padding(.bottom, 25)
+                                .opacity(checkForm() ? 0.5 : 1.0)
+                        }
+                    }).disabled(checkForm())
                     NavigationLink(destination: RegisterView()){
                         HStack{
                             Text("Don't you have an account?")
@@ -75,7 +89,21 @@ struct LoginView: View {
                 Spacer()
             }.edgesIgnoringSafeArea(.top)
             .keyboardAwarePadding()
+            .alert(isPresented: .constant(authVM.error && authVM.errorType == "Login")) {
+                Alert(title: Text("An Error Occurred"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
+                    Text("I got it"), action: { self.authVM.error = false }
+                ))
+            }
     }
+    
+    func checkForm() -> Bool {
+        if self.authVM.email.isEmpty || self.authVM.password.isEmpty {
+            return true
+        }else{
+            return false
+        }
+    }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {
