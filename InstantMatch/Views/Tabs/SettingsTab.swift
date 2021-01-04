@@ -24,7 +24,7 @@ struct SettingsTab: View {
                     Text("Profile Settings")
                     
                 }) {
-                    NavigationLink(destination:Text("Name: Halil Yüce"), tag: 0, selection: $selection){
+                    NavigationLink(destination:SettingsName(user: $user), tag: 0, selection: $selection){
                         HStack{
                             Text("Name")
                             Spacer()
@@ -32,23 +32,15 @@ struct SettingsTab: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:Text("Gender: Male"), tag: 1, selection: $selection){
+                    NavigationLink(destination:SettingsInstagram(user: $user), tag: 1, selection: $selection){
                         HStack{
-                            Text("Gender")
+                            Text("Instagram")
                             Spacer()
-                            Text(user?.gender == 0 ? "Male" : user?.gender == 1 ? "Female" : "Other")
+                            Text("@\(user?.username ?? "")")
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:Text("Country: Turkey"), tag: 2, selection: $selection){
-                        HStack{
-                            Text("Country")
-                            Spacer()
-                            Text("Turkey")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    NavigationLink(destination:Text("Birthday: 18.06.1993"), tag: 3, selection: $selection){
+                    NavigationLink(destination:SettingsBirthday(user: $user), tag: 2, selection: $selection){
                         HStack{
                             Text("Birthday")
                             Spacer()
@@ -56,11 +48,27 @@ struct SettingsTab: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:Text("Looking for: Female - Worldwide"), tag: 4, selection: $selection){
+                    NavigationLink(destination:SettingsGender(user: $user), tag: 3, selection: $selection){
+                        HStack{
+                            Text("Gender")
+                            Spacer()
+                            Text(user?.gender == 0 ? "Male" : user?.gender == 1 ? "Female" : "Other")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    NavigationLink(destination:SettingsLookingFor(user: $user), tag: 4, selection: $selection){
                         HStack{
                             Text("Looking for")
                             Spacer()
-                            Text("Female - Worldwide")
+                            Text(user?.lookingFor == 0 ? "Male" : user?.lookingFor == 1 ? "Female" : "Both")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    NavigationLink(destination:Text("Edit Photos"), tag: 5, selection: $selection){
+                        HStack{
+                            Text("Edit Photos")
+                            Spacer()
+                            Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -85,10 +93,10 @@ struct SettingsTab: View {
                             SKStoreReviewController.requestReview()
                         }
                     }
-                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Terms of Service"), displayMode: .inline), tag: 5, selection: $selection){
+                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Terms of Service"), displayMode: .inline), tag: 6, selection: $selection){
                         Text("Terms of Service")
                     }
-                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Privacy Policy"), displayMode: .inline), tag: 6, selection: $selection){
+                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Privacy Policy"), displayMode: .inline), tag: 7, selection: $selection){
                         Text("Privacy Policy")
                     }
                 }

@@ -31,7 +31,9 @@ struct SwapsTab: View {
         }
         .zIndex(1.0)
         .onAppear(){
-            self.viewModel.loadCards()
+            if viewModel.cards.count == 0 {
+                self.viewModel.loadCards()
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ struct Welcome : Codable{
 
 // MARK: - User
 struct User : Codable{
-    let images: [String]?
-    let _id, username, name, email, birthDate: String?
-    let gender, lookingFor: Int?
+    var images: [String]?
+    var _id, username, name, email, birthDate: String?
+    var gender, lookingFor: Int?
 }
