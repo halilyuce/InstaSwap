@@ -11,6 +11,8 @@ struct SettingsName: View {
     
     @Binding var user: User?
     @State var name: String = ""
+    @State var error: Bool = false
+    @ObservedObject var authVM : AuthVM = .shared
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -20,18 +22,34 @@ struct SettingsName: View {
             }
             
             Button {
-                self.user?.name = self.name
-                try? UserDefaults.standard.setCustomObject(user, forKey: "user")
-                self.presentationMode.wrappedValue.dismiss()
+                self.authVM.updateUser(name: name) { success in
+                    if success{
+                        self.user?.name = self.name
+                        try? UserDefaults.standard.setCustomObject(user, forKey: "user")
+                        self.presentationMode.wrappedValue.dismiss()
+                    }else{
+                        self.error.toggle()
+                    }
+                }
             } label: {
-                Text("Save Changes")
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
+                if self.authVM.updateStatus == .loading{
+                    ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                }else{
+                    Text("Save Changes")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                }
             }.listRowBackground(Color.pink)
         }
         .onAppear(){
             self.name = user?.name ?? ""
         }
         .navigationBarTitle(Text("Your Name"), displayMode: .inline)
+        .alert(isPresented: $error) {
+            Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
+                    Text("I got it")))
+        }
     }
 }

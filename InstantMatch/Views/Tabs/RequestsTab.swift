@@ -80,7 +80,7 @@ struct RequestsTab: View {
                         }
                     }.listStyle(PlainListStyle())
                 }else{
-                    EmptyView()
+                    Text("Nothing to show!")
                 }
                 
                 if self.viewModel.notificationStatus == .loading{

@@ -31,6 +31,123 @@ class HttpManager {
     
     private init() { }
     
+    public func patch(_ url: URL, token: String?, parameters: [String:Any]?, completionBlock: @escaping (Result<Data, Error>) -> Void) {
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        
+        switch Locale.current.identifier {
+        case "tr":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "tr_US":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "tr_TR":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "en":
+            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+        default:
+            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            print("dil problemi var: " + Locale.current.identifier)
+        }
+        
+        request.setValue("iOS", forHTTPHeaderField: "User-Agent")
+        
+        if token != nil {
+            request.setValue(token, forHTTPHeaderField: "Authorization")
+        }else{
+            request.setValue(UserDefaults.standard.object(forKey: "token") as? String ?? "", forHTTPHeaderField: "Authorization")
+        }
+        
+        if parameters != nil{
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters!, options: .prettyPrinted) else {
+                return
+            }
+            request.httpBody = httpBody
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                completionBlock(.failure(error!))
+                return
+            }
+            
+            guard
+                let responseData = data,
+                let httpResponse = response as? HTTPURLResponse
+                else {
+                    completionBlock(.failure(HttpError.invalidResponse(data, response)))
+                    return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200..<300:
+                completionBlock(.success(responseData))
+            case 417:  // if there are others, add them to this list
+                completionBlock(.failure(HttpError.apiError(data!)))
+            default:
+                completionBlock(.failure(HttpError.invalidStatusCode(httpResponse.statusCode)))
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    public func delete(_ url: URL, token: String?, completionBlock: @escaping (Result<Data, Error>) -> Void) {
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        switch Locale.current.identifier {
+        case "tr":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "tr_US":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "tr_TR":
+            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+        case "en":
+            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+        default:
+            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            print("dil problemi var: " + Locale.current.identifier)
+        }
+        
+        request.setValue("iOS", forHTTPHeaderField: "User-Agent")
+        
+        if token != nil {
+            request.setValue(token, forHTTPHeaderField: "Authorization")
+        }else{
+            request.setValue(UserDefaults.standard.object(forKey: "token") as? String ?? "", forHTTPHeaderField: "Authorization")
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                completionBlock(.failure(error!))
+                return
+            }
+            
+            guard
+                let responseData = data,
+                let httpResponse = response as? HTTPURLResponse
+                else {
+                    completionBlock(.failure(HttpError.invalidResponse(data, response)))
+                    return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200..<300:
+                completionBlock(.success(responseData))
+            case 417:  // if there are others, add them to this list
+                completionBlock(.failure(HttpError.apiError(data!)))
+            default:
+                completionBlock(.failure(HttpError.invalidStatusCode(httpResponse.statusCode)))
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
     public func get(_ url: URL, token: String?, completionBlock: @escaping (Result<Data, Error>) -> Void) {
         
         var request = URLRequest(url: url)

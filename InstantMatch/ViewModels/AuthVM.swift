@@ -5,7 +5,7 @@
 //  Created by Halil Yuce on 21.11.2020.
 //
 
-import Foundation
+import SwiftUI
 
 enum Status {
     case ready
@@ -24,12 +24,14 @@ class AuthVM: ObservableObject {
     @Published var loggedIn = false
     @Published var status = Status.ready
     @Published var registerStatus = Status.ready
+    @Published var deleteStatus = Status.ready
+    @Published var updateStatus = Status.ready
     
-//  Login Inputs
+    //  Login Inputs
     @Published var email: String = ""
     @Published var password: String = ""
     
-//  Register Inputs
+    //  Register Inputs
     let genders = ["MALE", "FEMALE", "OTHER"]
     let lookingfor = ["MALE", "FEMALE", "BOTH"]
     
@@ -44,6 +46,11 @@ class AuthVM: ObservableObject {
     private init() { }
     
     static let shared = AuthVM()
+    
+    @Environment(\.viewController) private var viewControllerHolder: ViewControllerHolder
+    private var viewController: UIViewController? {
+        self.viewControllerHolder.value
+    }
     
     
     func login() {
@@ -69,10 +76,16 @@ class AuthVM: ObservableObject {
     }
     
     func logOut(){
+        
         self.loggedIn = false
-        UserDefaults.standard.set(nil, forKey: "token")
+        UserDefaults.standard.set("", forKey: "token")
         UserDefaults.standard.set(nil, forKey: "userID")
         UserDefaults.standard.set(nil, forKey: "user")
+        
+        self.viewController?.present(style: .fullScreen) {
+            ContentView()
+        }
+        
     }
     
     func register(){
@@ -93,6 +106,44 @@ class AuthVM: ObservableObject {
                 self.error.toggle()
                 self.errorDesc = "Please check your information."
                 self.errorType = "Register"
+            }
+        }
+    }
+    
+    func updateUser(name: String? = nil, completion: @escaping (Bool) -> Void){
+        self.updateStatus = .loading
+        ApiManager.shared.updateUser(name: name) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.updateStatus = .done
+                DispatchQueue.main.async { completion(true) }
+            case .failure(_):
+                print("error update user")
+                self.updateStatus = .parseError
+                DispatchQueue.main.async { completion(false) }
+                self.error.toggle()
+                self.errorDesc = NSLocalizedString("Please try again.", comment: "")
+                self.errorType = "Update"
+            }
+        }
+    }
+    
+    func deleteUser(completion: @escaping (Bool) -> Void){
+        self.deleteStatus = .loading
+        ApiManager.shared.deleteUser() { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.deleteStatus = .done
+                DispatchQueue.main.async { completion(true) }
+            case .failure(_):
+                print("error delete user")
+                self.deleteStatus = .parseError
+                DispatchQueue.main.async { completion(false) }
+                self.error.toggle()
+                self.errorDesc = NSLocalizedString("Please try again.", comment: "")
+                self.errorType = "Delete"
             }
         }
     }

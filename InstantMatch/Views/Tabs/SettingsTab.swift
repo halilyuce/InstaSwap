@@ -9,10 +9,11 @@ import SwiftUI
 import StoreKit
 
 struct SettingsTab: View {
-
+    
     @State var user: User? = try? UserDefaults.standard.customObject(forKey: "user")
     @State var selection: Int? = nil
-    @State private var notify = true
+    @State var notify = true
+    @State var beSure: Bool = false
     @ObservedObject var authVM: AuthVM = .shared
     
     var body: some View {
@@ -114,7 +115,9 @@ struct SettingsTab: View {
                         Spacer()
                     }
                     HStack{
-                        Button(action:{}){
+                        Button(action:{
+                            self.beSure.toggle()
+                        }){
                             Text("Delete Account")
                         }
                         Spacer()
@@ -123,6 +126,16 @@ struct SettingsTab: View {
             }.modifier(GroupedListModifier())
             .navigationBarTitle(Text("Settings"))
         }.phoneOnlyStackNavigationView()
+        .alert(isPresented: $beSure) {
+            Alert(title: Text("Delete Account"), message: Text("You are about to delete your account, are you sure you want to do this?"), primaryButton: Alert.Button.default(
+                    Text("Cancel")), secondaryButton: Alert.Button.destructive(Text("Yes, sure"), action: {
+                        authVM.deleteUser() { success in
+                            if success{
+                                self.authVM.logOut()
+                            }
+                        }
+                    }))
+        }
     }
 }
 

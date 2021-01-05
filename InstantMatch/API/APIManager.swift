@@ -13,11 +13,12 @@ class ApiManager {
     private init() { }
     
     let baseURL = "https://api.labters.com/api/"
-    let loginURL = "/user/login"
-    let registerURL = "/user/register"
-    let doubletakeURL = "/main/doubleTake"
-    let postSwipeURL = "/main/postSwipe"
-    let notificationsURL = "/notifications"
+    let loginURL = "user/login"
+    let registerURL = "user/register"
+    let doubletakeURL = "main/doubleTake"
+    let postSwipeURL = "main/postSwipe"
+    let notificationsURL = "notifications"
+    let settingsUserURL = "settings/user"
     
     func login(email:String, password:String, completion: @escaping (Result<Welcome, Error>) -> Void) {
         
@@ -152,6 +153,46 @@ class ApiManager {
                 } catch {
                     print("Failed to decode standings from bundle: \(error.localizedDescription)")
                 }
+            }
+        }
+    }
+    
+    func updateUser(name:String?, completion: @escaping (Result<Welcome, Error>) -> Void) {
+        
+        let url = baseURL + settingsUserURL
+        var params: [String : Any] = [:]
+        
+        if name != nil{
+            params = ["name": name!]
+        }
+        
+        HttpManager.shared.patch(URL(string: url)!, token: nil, parameters: params) { result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async { completion(.failure(error)) }
+                
+            case .success(let data):
+                do {
+                    let bool = try JSONDecoder().decode(Welcome.self, from: data)
+                    DispatchQueue.main.async { completion(.success(bool)) }
+                } catch {
+                    print("Failed to decode standings from bundle: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func deleteUser(completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let url = baseURL + settingsUserURL
+        
+        HttpManager.shared.delete(URL(string: url)!, token: nil) { result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async { completion(.failure(error)) }
+                
+            case .success(_):
+                DispatchQueue.main.async { completion(.success(true)) }
             }
         }
     }

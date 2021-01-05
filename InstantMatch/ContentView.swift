@@ -21,7 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            if !token.isEmpty || authVM.loggedIn {
+            if token != "" || authVM.loggedIn {
                 TabView(selection: self.$selectedTab) {
                     RequestsTab()
                         .tabItem {
