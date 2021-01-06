@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 struct GridData: Identifiable, Equatable {
     let id: String
     let image: String?
-    var system: Image
+    var system: UIImage
 }
 
 //MARK: - Model
@@ -30,12 +30,18 @@ class Model: ObservableObject {
 //MARK: - Grid
 
 @available(iOS 14.0, *)
-struct PhotosView: View {
+struct PhotosViewNew: View {
     
     @StateObject private var model = Model()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var dragging: GridData?
     @State var imagePickerViewModel = ImagePickerViewModel()
+    @ObservedObject var authVM : AuthVM = .shared
+    
+    func convertImageToBase64(_ image: UIImage) -> String? {
+        let imageData = image.jpegData(compressionQuality: 0.8)
+        return imageData?.base64EncodedString(options:Data.Base64EncodingOptions.lineLength64Characters)
+    }
     
     var body: some View {
         
@@ -54,7 +60,7 @@ struct PhotosView: View {
                                     .padding(-5)
                                     .background(Color.white)
                             }.opacity(dragging != nil ? 0 : 1)
-
+                            
                         }
                         .overlay(dragging?.id == d.id ? Color.white.opacity(0.8) : Color.clear)
                         .onDrag {
@@ -64,22 +70,28 @@ struct PhotosView: View {
                         .onDrop(of: [UTType.text], delegate: DragRelocateDelegate(item: d, listData: $model.data, current: $dragging))
                     }
                     if model.data.count < 6 {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(UIColor.systemGray6))
-                            Button {
-                                self.imagePickerViewModel.isPresented.toggle()
-                            } label: {
+                        Button {
+                            self.imagePickerViewModel.isPresented.toggle()
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(UIColor.systemGray6))
                                 Image(systemName: "person.crop.circle.fill.badge.plus")
                                     .font(.title)
                                     .foregroundColor(Color(UIColor.systemGray3))
-                            }
-
-                        }.frame(height: 150)
+                            }.frame(height: 150)
+                        }
                     }
                 }.animation(.default, value: model.data).padding(.top, UIScreen.main.bounds.height / 7)
                 Spacer()
                 Button(action: {
+                    var photos = [UserImages]()
+                    for photo in model.data {
+                        photos.append(UserImages(imageUrl: nil, base64:convertImageToBase64(photo.system)))
+                    }
+                    authVM.postPhotos(images: photos) { success in
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 }, label: {
                     Text("Save Changes")
                         .fontWeight(.bold)
@@ -114,15 +126,15 @@ struct PhotosView: View {
             }
         }.edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $imagePickerViewModel.isPresented) {
-                        ImagePickerView(model: self.$imagePickerViewModel)
-                    }
-        .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [Image]) -> Void in
-                        withAnimation {
-                            for image in images {
-                                self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: image))
-                            }
-                        }
-                    }
+            ImagePickerView(model: self.$imagePickerViewModel)
+        }
+        .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [UIImage]) -> Void in
+            withAnimation {
+                for image in images {
+                    self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: image))
+                }
+            }
+        }
         .navigationBarHidden(true)
     }
 }
@@ -167,7 +179,7 @@ struct GridItemView: View {
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
                 .cornerRadius(10)
         }else{
-            d.system
+            Image(uiImage: d.system)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)

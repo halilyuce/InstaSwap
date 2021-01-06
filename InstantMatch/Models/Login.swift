@@ -12,6 +12,15 @@ struct Welcome : Codable{
     let user: User?
 }
 
+struct WelcomeUser : Codable{
+    let data: User?
+}
+
+struct UserImages : Codable{
+    let imageUrl: String?
+    let base64: String?
+}
+
 // MARK: - User
 struct User : Codable{
     var images: [String]?

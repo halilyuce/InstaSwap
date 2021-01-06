@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsGender: View {
     @Binding var user: User?
     @State var gender: Int = 0
+    @State var error: Bool = false
     @ObservedObject var authVM: AuthVM = .shared
     @Environment(\.presentationMode) private var presentationMode
     
@@ -31,18 +32,34 @@ struct SettingsGender: View {
             }
             
             Button {
-                self.user?.gender = self.gender
-                try? UserDefaults.standard.setCustomObject(user, forKey: "user")
-                self.presentationMode.wrappedValue.dismiss()
+                self.authVM.updateUser(gender: gender) { success in
+                    if success{
+                        self.user?.gender = self.gender
+                        try? UserDefaults.standard.setCustomObject(user, forKey: "user")
+                        self.presentationMode.wrappedValue.dismiss()
+                    }else{
+                        self.error.toggle()
+                    }
+                }
             } label: {
-                Text("Save Changes")
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
+                if self.authVM.updateStatus == .loading{
+                    ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                }else{
+                    Text("Save Changes")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                }
             }.listRowBackground(Color.pink)
         }
         .onAppear(){
             self.gender = user?.gender ?? 0
         }
         .navigationBarTitle(Text("Your Gender"), displayMode: .inline)
+        .alert(isPresented: $error) {
+            Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
+                    Text("I got it")))
+        }
     }
 }

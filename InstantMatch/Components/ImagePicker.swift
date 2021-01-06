@@ -51,8 +51,7 @@ struct ImagePickerView : UIViewControllerRepresentable {
 
             guard let uiImage = info[.originalImage] as? UIImage else { return }
 
-            let image = Image(uiImage: uiImage)
-            parentView.model.pickedImagesSubject?.send([image])
+            parentView.model.pickedImagesSubject?.send([uiImage])
             parentView.model.isPresented = false
 
         }
@@ -63,5 +62,5 @@ struct ImagePickerView : UIViewControllerRepresentable {
 
 struct ImagePickerViewModel {
     var isPresented: Bool = false
-    let pickedImagesSubject: PassthroughSubject<[Image], Never>! = PassthroughSubject<[Image], Never>()
+    let pickedImagesSubject: PassthroughSubject<[UIImage], Never>! = PassthroughSubject<[UIImage], Never>()
 }

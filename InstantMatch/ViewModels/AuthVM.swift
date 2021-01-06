@@ -26,6 +26,7 @@ class AuthVM: ObservableObject {
     @Published var registerStatus = Status.ready
     @Published var deleteStatus = Status.ready
     @Published var updateStatus = Status.ready
+    @Published var photoStatus = Status.ready
     
     //  Login Inputs
     @Published var email: String = ""
@@ -110,9 +111,9 @@ class AuthVM: ObservableObject {
         }
     }
     
-    func updateUser(name: String? = nil, completion: @escaping (Bool) -> Void){
+    func updateUser(name: String? = nil, username: String? = nil, birthDate: String? = nil, gender: Int? = nil, lookingFor: Int? = nil, completion: @escaping (Bool) -> Void){
         self.updateStatus = .loading
-        ApiManager.shared.updateUser(name: name) { [weak self] result in
+        ApiManager.shared.updateUser(name: name, username: username, birthDate: birthDate, gender: gender, lookingFor: lookingFor) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
@@ -144,6 +145,25 @@ class AuthVM: ObservableObject {
                 self.error.toggle()
                 self.errorDesc = NSLocalizedString("Please try again.", comment: "")
                 self.errorType = "Delete"
+            }
+        }
+    }
+    
+    func postPhotos(images: [UserImages],completion: @escaping (Bool) -> Void){
+        self.deleteStatus = .loading
+        ApiManager.shared.postPhotos(images: images) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.photoStatus = .done
+                DispatchQueue.main.async { completion(true) }
+            case .failure(_):
+                print("error delete user")
+                self.photoStatus = .parseError
+                DispatchQueue.main.async { completion(false) }
+                self.error.toggle()
+                self.errorDesc = NSLocalizedString("Please try again.", comment: "")
+                self.errorType = "Photos"
             }
         }
     }

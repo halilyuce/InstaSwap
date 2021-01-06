@@ -65,12 +65,23 @@ struct SettingsTab: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:Text("Edit Photos"), tag: 5, selection: $selection){
-                        HStack{
-                            Text("Edit Photos")
-                            Spacer()
-                            Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
-                                .foregroundColor(.gray)
+                    if #available(iOS 14.0, *) {
+                        NavigationLink(destination:PhotosViewNew(), tag: 5, selection: $selection){
+                            HStack{
+                                Text("Edit Photos")
+                                Spacer()
+                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    } else {
+                        NavigationLink(destination:PhotosViewOld(), tag: 5, selection: $selection){
+                            HStack{
+                                Text("Edit Photos")
+                                Spacer()
+                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                 }
