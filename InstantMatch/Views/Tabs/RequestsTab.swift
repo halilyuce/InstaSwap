@@ -24,7 +24,6 @@ struct RequestsTab: View {
                                     .scaledToFill()
                                     .frame(width: 42, height: 42, alignment: .center)
                                     .cornerRadius(21)
-                                    .padding(.trailing, 10)
                                 VStack(alignment: .leading, spacing:3){
                                     Text(notification.user?.name ?? "")
                                         .fontWeight(.semibold)
@@ -72,7 +71,7 @@ struct RequestsTab: View {
                                             }
                                         }
                                     }.padding(.top, 10)
-                                }
+                                }.padding(.leading, 8)
                             }.padding(.vertical, 8)
                             .onAppear(){
                                 self.viewModel.loadMore(currentItem: notification)
@@ -103,13 +102,13 @@ struct RequestsTab: View {
     
     func desc(type:Int) -> String {
         if type == 0 {
-            return "Here is my Insta! Follow me 😉"
+            return "Here is my Insta! Follow me 😉".localized
         }else  if type == 1 {
-            return "Hey! May I have your insta? 😉"
+            return "Hey! May I have your insta? 😉".localized
         }else if type == 2 {
-            return "You've accepted this request."
+            return "You've accepted this request.".localized
         }else{
-            return "You've declined this request."
+            return "You've declined this request.".localized
         }
     }
     

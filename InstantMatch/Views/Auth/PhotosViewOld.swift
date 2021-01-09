@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PhotosViewOld: View {
+    @Binding var user: User?
     var body: some View {
         Text("Hello, World!")
     }

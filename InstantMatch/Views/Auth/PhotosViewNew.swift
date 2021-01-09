@@ -8,11 +8,12 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import SDWebImageSwiftUI
 
 struct GridData: Identifiable, Equatable {
     let id: String
     let image: String?
-    var system: UIImage
+    var system: UIImage?
 }
 
 //MARK: - Model
@@ -32,6 +33,7 @@ class Model: ObservableObject {
 @available(iOS 14.0, *)
 struct PhotosViewNew: View {
     
+    @Binding var user: User?
     @StateObject private var model = Model()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var dragging: GridData?
@@ -52,7 +54,9 @@ struct PhotosViewNew: View {
                         ZStack(alignment:.bottomTrailing){
                             GridItemView(d: d)
                             Button {
-                                model.data.remove(at: 0)
+                                if let index = model.data.firstIndex(where: {$0.id == d.id}){
+                                    model.data.remove(at: index)
+                                }
                             } label: {
                                 Image(systemName: "minus.circle.fill")
                                     .foregroundColor(Color.red)
@@ -87,22 +91,44 @@ struct PhotosViewNew: View {
                 Button(action: {
                     var photos = [UserImages]()
                     for photo in model.data {
-                        photos.append(UserImages(imageUrl: nil, base64:convertImageToBase64(photo.system)))
+                        if photo.system != nil{
+                            photos.append(UserImages(imageUrl: nil, base64:convertImageToBase64(photo.system!)))
+                        }else{
+                            photos.append(UserImages(imageUrl: photo.image, base64:nil))
+                        }
                     }
-                    authVM.postPhotos(images: photos) { success in
+                    authVM.postPhotos(images: photos) { photos in
+                        self.user?.images = photos
+                        try? UserDefaults.standard.setCustomObject(user, forKey: "user")
+                        SDImageCache.shared.clearMemory()
+                        SDImageCache.shared.clearDisk()
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {
-                    Text("Save Changes")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50, alignment: .center)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                        .cornerRadius(6)
-                        .padding(.horizontal, 30)
-                        .padding(.bottom, 25)
-                })
+                    if self.authVM.photoStatus == .loading{
+                        ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                            .cornerRadius(6)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 25)
+                            .opacity(0.5)
+                            .disabled(true)
+                    }else{
+                        Text("Save Changes")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                            .cornerRadius(6)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 25)
+                            .opacity(model.data.count == 0 ? 0.5 : 1.0)
+                    }
+                }).disabled(model.data.count == 0)
             }
             ZStack(alignment: .topLeading){
                 Rectangle()
@@ -127,6 +153,11 @@ struct PhotosViewNew: View {
         }.edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $imagePickerViewModel.isPresented) {
             ImagePickerView(model: self.$imagePickerViewModel)
+        }
+        .onAppear(){
+            for photo in user?.images ?? [] {
+                self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
+            }
         }
         .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [UIImage]) -> Void in
             withAnimation {
@@ -173,13 +204,13 @@ struct GridItemView: View {
     
     var body: some View {
         if d.image != nil{
-            Image(d.image!)
+            WebImage(url: URL(string: d.image!)!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
                 .cornerRadius(10)
         }else{
-            Image(uiImage: d.system)
+            Image(uiImage: d.system!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)

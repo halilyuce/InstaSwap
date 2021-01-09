@@ -66,7 +66,7 @@ struct SettingsTab: View {
                         }
                     }
                     if #available(iOS 14.0, *) {
-                        NavigationLink(destination:PhotosViewNew(), tag: 5, selection: $selection){
+                        NavigationLink(destination:PhotosViewNew(user: $user), tag: 5, selection: $selection){
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()
@@ -75,7 +75,7 @@ struct SettingsTab: View {
                             }
                         }
                     } else {
-                        NavigationLink(destination:PhotosViewOld(), tag: 5, selection: $selection){
+                        NavigationLink(destination:PhotosViewOld(user: $user), tag: 5, selection: $selection){
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()

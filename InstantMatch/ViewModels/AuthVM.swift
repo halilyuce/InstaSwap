@@ -151,18 +151,18 @@ class AuthVM: ObservableObject {
         }
     }
     
-    func postPhotos(images: [UserImages],completion: @escaping (Bool) -> Void){
-        self.deleteStatus = .loading
+    func postPhotos(images: [UserImages],completion: @escaping ([String]) -> Void){
+        self.photoStatus = .loading
         ApiManager.shared.postPhotos(images: images) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
+            case .success(let res):
                 self.photoStatus = .done
-                DispatchQueue.main.async { completion(true) }
+                DispatchQueue.main.async { completion(res.data?.images ?? []) }
             case .failure(_):
                 print("error delete user")
                 self.photoStatus = .parseError
-                DispatchQueue.main.async { completion(false) }
+                DispatchQueue.main.async { completion([]) }
                 self.error.toggle()
                 self.errorDesc = NSLocalizedString("Please try again.", comment: "")
                 self.errorType = "Photos"

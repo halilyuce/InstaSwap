@@ -243,7 +243,11 @@ class ApiManager {
         var imagesArray:Array<Dictionary<String, String?>> = Array()
         
         for image in images {
-            imagesArray.append(["imageURL": nil, "base64": image.base64!])
+            if image.base64 != nil{
+                imagesArray.append(["imageUrl": nil, "base64": image.base64!])
+            }else{
+                imagesArray.append(["imageUrl": image.imageUrl, "base64": nil])
+            }
         }
     
         let params =  ["images": imagesArray] as [String : Any]
