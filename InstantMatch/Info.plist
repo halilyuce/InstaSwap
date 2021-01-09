@@ -76,5 +76,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Network access required.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Gallery access required.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_Bagel._tcp</string>
+	</array>
 </dict>
 </plist>

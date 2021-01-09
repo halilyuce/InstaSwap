@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+extension NSNotification {
+    static let goNotification = NSNotification.Name.init("Notification")
+}
+
 enum SelectedTab: Hashable {
     case requests
     case swaps
@@ -15,14 +19,14 @@ enum SelectedTab: Hashable {
 
 struct ContentView: View {
     
-    @State var selectedTab: SelectedTab = .swaps
     @ObservedObject var authVM: AuthVM = .shared
+    @ObservedObject var viewModel: ViewModel = .shared
     @State var token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
     
     var body: some View {
         ZStack{
             if token != "" || authVM.loggedIn {
-                TabView(selection: self.$selectedTab) {
+                TabView(selection: self.$authVM.selectedTab) {
                     RequestsTab()
                         .tabItem {
                             Image(systemName: "person.badge.plus.fill")
@@ -33,7 +37,7 @@ struct ContentView: View {
                         .tabItem {
                             Image(systemName: "rectangle.stack.person.crop.fill")
                                 .renderingMode(.template)
-                            Text("Swipes")
+                            Text("Match")
                         }.tag(SelectedTab.swaps)
                     SettingsTab()
                         .tabItem {
@@ -45,14 +49,19 @@ struct ContentView: View {
             }else{
                 WelcomeView(sign: self.$authVM.loggedIn)
             }
+        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.goNotification))
+        { obj in
+            let userInfo = obj.userInfo
+            if let tapped = userInfo?["tapped"] as? Bool{
+                if tapped{
+                    self.authVM.selectedTab = .requests
+                }
+            }
+            if let model = userInfo?["model"] as? Notification{
+                if self.viewModel.notifications.firstIndex(where: {$0.id == model.id }) == nil{
+                    self.viewModel.notifications.insert(model, at: 0)
+                }
+            }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .preferredColorScheme(.dark)
-            .previewDevice("iPhone 12 Pro")
     }
 }

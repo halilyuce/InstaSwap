@@ -22,6 +22,7 @@ class AuthVM: ObservableObject {
     @Published var errorDesc = ""
     @Published var errorType = ""
     @Published var loggedIn = false
+    @Published var selectedTab: SelectedTab = .swaps
     @Published var status = Status.ready
     @Published var registerStatus = Status.ready
     @Published var deleteStatus = Status.ready
@@ -53,7 +54,6 @@ class AuthVM: ObservableObject {
         self.viewControllerHolder.value
     }
     
-    
     func login() {
         self.status = .loading
         ApiManager.shared.login(email: email, password: password) { [weak self] result in
@@ -65,6 +65,7 @@ class AuthVM: ObservableObject {
                 UserDefaults.standard.set("Bearer " + (result.authToken ?? ""), forKey: "token")
                 UserDefaults.standard.set(result.user?._id ?? 0, forKey: "userID")
                 try? UserDefaults.standard.setCustomObject(result.user, forKey: "user")
+                self.deviceId(id: UserDefaults.standard.string(forKey: "fcmtoken"), os: 0, auth: true)
                 self.loggedIn = true
             case .failure(_):
                 print("error")
@@ -77,11 +78,11 @@ class AuthVM: ObservableObject {
     }
     
     func logOut(){
-        
         self.loggedIn = false
         UserDefaults.standard.set("", forKey: "token")
         UserDefaults.standard.set(nil, forKey: "userID")
         UserDefaults.standard.set(nil, forKey: "user")
+        self.deviceId(id: nil, os: nil, auth: true)
         
         self.viewController?.present(style: .fullScreen) {
             ContentView()
@@ -100,6 +101,7 @@ class AuthVM: ObservableObject {
                 UserDefaults.standard.set("Bearer " + (result.authToken ?? ""), forKey: "token")
                 UserDefaults.standard.set(result.user?._id ?? 0, forKey: "userID")
                 try? UserDefaults.standard.setCustomObject(result.user, forKey: "user")
+                self.deviceId(id: UserDefaults.standard.string(forKey: "fcmtoken"), os: 0, auth: true)
                 self.loggedIn = true
             case .failure(_):
                 print("error")
@@ -164,6 +166,24 @@ class AuthVM: ObservableObject {
                 self.error.toggle()
                 self.errorDesc = NSLocalizedString("Please try again.", comment: "")
                 self.errorType = "Photos"
+            }
+        }
+    }
+    
+    func deviceId(id: String? = nil, os:Int? = nil, auth: Bool){
+        
+        let oldfcmToken = UserDefaults.standard.string(forKey: "fcmtoken")
+        let accessToken = UserDefaults.standard.string(forKey: "token")
+        
+        if (accessToken != nil){
+            if auth{
+                ApiManager.shared.postDeviceId(id: id, os: os) { _ in
+                }
+            }else{
+                if id != oldfcmToken {
+                    ApiManager.shared.postDeviceId(id: id, os: os) { _ in
+                    }
+                }
             }
         }
     }

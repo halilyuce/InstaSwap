@@ -11,5 +11,8 @@ pod 'lottie-ios'
 pod 'Bagel'
 pod 'SDWebImageSwiftUI'
 pod 'SDWebImageWebPCoder'
+pod 'Firebase/Analytics'
+pod 'Firebase/Crashlytics'
+pod 'Firebase/Messaging'
 
 end

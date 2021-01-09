@@ -12,6 +12,16 @@ struct WelcomeNotification: Codable{
     let list: [Notification]
 }
 
+// MARK: - Welcome
+struct PushNotificationModel: Codable{
+    let notificationModel: Notification
+}
+
+// MARK: - SuccessResponse
+struct SuccessResponse: Codable{
+    let success: Bool
+}
+
 // MARK: - List
 struct Notification: Codable {
     let id: String

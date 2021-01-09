@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>141565683439-q907k616ll0v770o030a6r5oioc5pf7i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.141565683439-q907k616ll0v770o030a6r5oioc5pf7i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBNH_EoEYjl4Ef9Ejz5eBka-V2BPkjmYFc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>141565683439</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.labters.InstantMatch</string>
+	<key>PROJECT_ID</key>
+	<string>instantmatch-3d29a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>instantmatch-3d29a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:141565683439:ios:7a547cde9e6bb6d1ed9d1a</string>
+</dict>
+</plist>

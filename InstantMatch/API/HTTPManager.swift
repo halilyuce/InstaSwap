@@ -38,18 +38,21 @@ class HttpManager {
         
         switch Locale.current.identifier {
         case "tr":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_US":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_TR":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "en":
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
         default:
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
             print("dil problemi var: " + Locale.current.identifier)
         }
         
+        //HTTP Headers
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("iOS", forHTTPHeaderField: "User-Agent")
         
         if token != nil {
@@ -100,15 +103,15 @@ class HttpManager {
         
         switch Locale.current.identifier {
         case "tr":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_US":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_TR":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "en":
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
         default:
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
             print("dil problemi var: " + Locale.current.identifier)
         }
         
@@ -155,15 +158,15 @@ class HttpManager {
         
         switch Locale.current.identifier {
         case "tr":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_US":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_TR":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "en":
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
         default:
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
             print("dil problemi var: " + Locale.current.identifier)
         }
         
@@ -209,15 +212,15 @@ class HttpManager {
         
         switch Locale.current.identifier {
         case "tr":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_US":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "tr_TR":
-            request.setValue("tr-TR", forHTTPHeaderField: "Accept-Language")
+            request.setValue("tr", forHTTPHeaderField: "Accept-Language")
         case "en":
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
         default:
-            request.setValue("en-EN", forHTTPHeaderField: "Accept-Language")
+            request.setValue("en", forHTTPHeaderField: "Accept-Language")
             print("dil problemi var: " + Locale.current.identifier)
         }
         

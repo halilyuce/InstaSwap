@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  InstantMatch
+
+  Created by Halil Yuce on 10.01.2021.
+  
+*/
+"Requests" = "İstekler";
+"Match" = "Eşleşme";
+"Settings" = "Ayarlar";
+" shared his/her insta with you" = " instasını sizinle paylaştı";
+"Stalk his/her insta and follow." = "Stalk yaptıktan sonra takip etmeye ne dersin?";
+" want your insta" = " instanı istiyor";
+"Stalk his/her insta and accept or decline request." = "Stalk yaptıktan sonra kabul edebilir veya reddetebilirsin.";
+" accepted your request" = " isteğini kabul etti";
+" want to share his/her insta with you." = " instasını seninle paylaşmak istiyor.";
+" declined your request" = " isteğini reddetti";
+" dont want to share his/her insta with you." = " instasını seninle paylaşmak istemiyor.";

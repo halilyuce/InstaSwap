@@ -20,6 +20,7 @@ class ApiManager {
     let notificationsURL = "notifications"
     let settingsUserURL = "settings/user"
     let photosURL = "settings/postPhotos"
+    let deviceIdURL = "notifications/deviceId"
     
     func login(email:String, password:String, completion: @escaping (Result<Welcome, Error>) -> Void) {
         
@@ -150,6 +151,27 @@ class ApiManager {
             case .success(let data):
                 do {
                     let bool = try JSONDecoder().decode(WelcomeNotification.self, from: data)
+                    DispatchQueue.main.async { completion(.success(bool)) }
+                } catch {
+                    print("Failed to decode standings from bundle: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func postDeviceId(id:String?, os:Int?, completion: @escaping (Result<SuccessResponse, Error>) -> Void) {
+        
+        let url = baseURL + deviceIdURL
+        let params =  ["deviceId": id, "deviceOS": os] as [String : Any]
+        
+        HttpManager.shared.post(URL(string: url)!, parameters: params) { result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async { completion(.failure(error)) }
+                
+            case .success(let data):
+                do {
+                    let bool = try JSONDecoder().decode(SuccessResponse.self, from: data)
                     DispatchQueue.main.async { completion(.success(bool)) }
                 } catch {
                     print("Failed to decode standings from bundle: \(error.localizedDescription)")
