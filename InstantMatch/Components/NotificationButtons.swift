@@ -35,7 +35,7 @@ struct StalkButtonNewer : View{
                             .font(.system(size: 15))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 35)
                             .padding(.vertical, 8)
                             .background(Color.pink)
                             .cornerRadius(8)

@@ -17,11 +17,13 @@ enum Status {
 
 class AuthVM: ObservableObject {
     
-    @Published var token = ""
+    @Published var user: User? = try? UserDefaults.standard.customObject(forKey: "user")
+    @Published var token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
     @Published var error = false
     @Published var errorDesc = ""
     @Published var errorType = ""
     @Published var loggedIn = false
+    @Published var showPhotoUpload = false
     @Published var selectedTab: SelectedTab = .swaps
     @Published var status = Status.ready
     @Published var registerStatus = Status.ready
@@ -42,7 +44,7 @@ class AuthVM: ObservableObject {
     @Published var register_name: String = ""
     @Published var register_email: String = ""
     @Published var register_gender: Int = 0
-    @Published var register_birthday: Date = Date()
+    @Published var register_birthday: Date = Calendar.current.date(byAdding: .year, value: -16, to: Date())!
     @Published var register_lookingfor: Int = 1
     
     private init() { }
@@ -65,6 +67,7 @@ class AuthVM: ObservableObject {
                 UserDefaults.standard.set("Bearer " + (result.authToken ?? ""), forKey: "token")
                 UserDefaults.standard.set(result.user?._id ?? 0, forKey: "userID")
                 try? UserDefaults.standard.setCustomObject(result.user, forKey: "user")
+                self.user = result.user
                 self.deviceId(id: UserDefaults.standard.string(forKey: "fcmtoken"), os: 0, auth: true)
                 self.loggedIn = true
             case .failure(_):
@@ -79,15 +82,13 @@ class AuthVM: ObservableObject {
     
     func logOut(){
         self.loggedIn = false
+        self.token = ""
+        self.selectedTab = .swaps
+        self.showPhotoUpload = false
         UserDefaults.standard.set("", forKey: "token")
         UserDefaults.standard.set(nil, forKey: "userID")
         UserDefaults.standard.set(nil, forKey: "user")
         self.deviceId(id: nil, os: nil, auth: true)
-        
-        self.viewController?.present(style: .fullScreen) {
-            ContentView()
-        }
-        
     }
     
     func register(){
@@ -101,8 +102,9 @@ class AuthVM: ObservableObject {
                 UserDefaults.standard.set("Bearer " + (result.authToken ?? ""), forKey: "token")
                 UserDefaults.standard.set(result.user?._id ?? 0, forKey: "userID")
                 try? UserDefaults.standard.setCustomObject(result.user, forKey: "user")
+                self.user = result.user
                 self.deviceId(id: UserDefaults.standard.string(forKey: "fcmtoken"), os: 0, auth: true)
-                self.loggedIn = true
+                self.showPhotoUpload = true
             case .failure(_):
                 print("error")
                 self.registerStatus = .parseError
@@ -139,6 +141,7 @@ class AuthVM: ObservableObject {
             switch result {
             case .success(_):
                 self.deleteStatus = .done
+                self.user = nil
                 DispatchQueue.main.async { completion(true) }
             case .failure(_):
                 print("error delete user")
@@ -151,13 +154,15 @@ class AuthVM: ObservableObject {
         }
     }
     
-    func postPhotos(images: [UserImages],completion: @escaping ([String]) -> Void){
+    func postPhotos(images: [UserImages], completion: @escaping ([String]) -> Void){
         self.photoStatus = .loading
         ApiManager.shared.postPhotos(images: images) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let res):
                 self.photoStatus = .done
+                self.user?.images = res.data?.images ?? []
+                try? UserDefaults.standard.setCustomObject(self.user, forKey: "user")
                 DispatchQueue.main.async { completion(res.data?.images ?? []) }
             case .failure(_):
                 print("error delete user")

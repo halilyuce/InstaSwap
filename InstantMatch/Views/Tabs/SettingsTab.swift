@@ -1,6 +1,6 @@
 //
 //  SettingsTab.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -10,7 +10,6 @@ import StoreKit
 
 struct SettingsTab: View {
     
-    @State var user: User? = try? UserDefaults.standard.customObject(forKey: "user")
     @State var selection: Int? = nil
     @State var notify = true
     @State var beSure: Bool = false
@@ -25,61 +24,61 @@ struct SettingsTab: View {
                     Text("Profile Settings")
                     
                 }) {
-                    NavigationLink(destination:SettingsName(user: $user), tag: 0, selection: $selection){
+                    NavigationLink(destination:SettingsName(user: $authVM.user), tag: 0, selection: $selection){
                         HStack{
                             Text("Name")
                             Spacer()
-                            Text(user?.name ?? "")
+                            Text(authVM.user?.name ?? "")
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:SettingsInstagram(user: $user), tag: 1, selection: $selection){
+                    NavigationLink(destination:SettingsInstagram(user: $authVM.user), tag: 1, selection: $selection){
                         HStack{
                             Text("Instagram")
                             Spacer()
-                            Text("@\(user?.username ?? "")")
+                            Text("@\(authVM.user?.username ?? "")")
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:SettingsBirthday(user: $user), tag: 2, selection: $selection){
+                    NavigationLink(destination:SettingsBirthday(user: $authVM.user), tag: 2, selection: $selection){
                         HStack{
                             Text("Birthday")
                             Spacer()
-                            Text(user?.birthDate?.toDateNodeTS().toString() ?? "")
+                            Text(authVM.user?.birthDate?.toDateNodeTS().toString() ?? "")
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:SettingsGender(user: $user), tag: 3, selection: $selection){
+                    NavigationLink(destination:SettingsGender(user: $authVM.user), tag: 3, selection: $selection){
                         HStack{
                             Text("Gender")
                             Spacer()
-                            Text(user?.gender == 0 ? "Male".localized : user?.gender == 1 ? "Female".localized : "Other".localized)
+                            Text(authVM.user?.gender == 0 ? "Male".localized : authVM.user?.gender == 1 ? "Female".localized : "Other".localized)
                                 .foregroundColor(.gray)
                         }
                     }
-                    NavigationLink(destination:SettingsLookingFor(user: $user), tag: 4, selection: $selection){
+                    NavigationLink(destination:SettingsLookingFor(user: $authVM.user), tag: 4, selection: $selection){
                         HStack{
                             Text("Looking for")
                             Spacer()
-                            Text(user?.lookingFor == 0 ? "Male".localized : user?.lookingFor == 1 ? "Female".localized : "Both".localized)
+                            Text(authVM.user?.lookingFor == 0 ? "Male".localized : authVM.user?.lookingFor == 1 ? "Female".localized : "Both".localized)
                                 .foregroundColor(.gray)
                         }
                     }
                     if #available(iOS 14.0, *) {
-                        NavigationLink(destination:PhotosViewNew(user: $user), tag: 5, selection: $selection){
+                        NavigationLink(destination:PhotosViewNew(user: $authVM.user), tag: 5, selection: $selection){
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()
-                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
+                                Text("\(authVM.user?.images?.count ?? 0) \(authVM.user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
                                     .foregroundColor(.gray)
                             }
                         }
                     } else {
-                        NavigationLink(destination:PhotosViewOld(user: $user), tag: 5, selection: $selection){
+                        NavigationLink(destination:PhotosViewOld(user: $authVM.user), tag: 5, selection: $selection){
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()
-                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
+                                Text("\(authVM.user?.images?.count ?? 0) \(authVM.user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
                                     .foregroundColor(.gray)
                             }
                         }
@@ -105,10 +104,10 @@ struct SettingsTab: View {
                             SKStoreReviewController.requestReview()
                         }
                     }
-                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Terms of Service"), displayMode: .inline), tag: 6, selection: $selection){
+                    NavigationLink(destination:SafariView(url: URL(string:"https://api.labters.com/terms-of-service")!).navigationBarTitle(Text("Terms of Service"), displayMode: .inline), tag: 6, selection: $selection){
                         Text("Terms of Service")
                     }
-                    NavigationLink(destination:SafariView(url: URL(string:"https://labters.com/gasomeapp")!).navigationBarTitle(Text("Privacy Policy"), displayMode: .inline), tag: 7, selection: $selection){
+                    NavigationLink(destination:SafariView(url: URL(string:"https://api.labters.com/privacy-notice")!).navigationBarTitle(Text("Privacy Policy"), displayMode: .inline), tag: 7, selection: $selection){
                         Text("Privacy Policy")
                     }
                 }

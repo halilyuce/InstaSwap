@@ -1,6 +1,6 @@
 //
 //  SwapCard.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -14,66 +14,62 @@ struct SwapCard: View {
     @ObservedObject var viewModel: ViewModel = .shared
     
     var body: some View {
-        ZStack(alignment: .top){
-            if person.images?.count ?? 0 > 0 {
-            LazyImage(url: URL(string: person.images?[person.index ?? 0] ?? "")!)
-                .equatable()
-            }
-            LinearGradient(gradient: Gradient(colors: [Color.pink.opacity(0.5),  Color.purple.opacity(0.25), Color.clear]), startPoint: .bottom, endPoint: .center)
-            if person.images?.count ?? 0 > 1{
-                HStack{
-                    ForEach(0..<person.images!.count){ i in
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color.white.opacity(person.index ?? 0 == i ? 1.0 : 0.5))
-                            .frame(height:3)
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 3)
-                    }
-                }.padding().frame(maxWidth: UIScreen.main.bounds.width)
-            }
-            VStack(alignment: .leading){
-                HStack {
-                    Image("yes")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:150)
-                        .opacity(Double((person.x ?? 0)/10 - 1))
-                    Spacer()
-                    Image("nope")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:150)
-                        .opacity(Double((person.x ?? 0)/10 * -1 - 1))
+        ZStack{
+            ZStack(alignment: .top){
+                if person.images?.count ?? 0 > 0 {
+                    LazyImage(url: URL(string: person.images?[person.index ?? 0] ?? "")!)
+                        .equatable()
                 }
-                Spacer()
-                HStack{
-                    Text("\(person.name ?? ""), \(birth(date: person.birthDate ?? ""))")
+                LinearGradient(gradient: Gradient(colors: [Color.pink.opacity(0.5),  Color.purple.opacity(0.25), Color.clear]), startPoint: .bottom, endPoint: .center)
+                if person.images?.count ?? 0 > 1{
+                    HStack{
+                        ForEach(0..<person.images!.count){ i in
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.white.opacity(person.index ?? 0 == i ? 1.0 : 0.5))
+                                .frame(height:3)
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal, 3)
+                        }
+                    }.padding().frame(maxWidth: UIScreen.main.bounds.width)
+                }
+                VStack(alignment: .leading){
+                    Spacer()
+                    HStack{
+                        Text("\(person.name ?? ""), \(birth(date: person.birthDate ?? ""))")
                             .font(.title)
                             .fontWeight(.bold)
+                        Spacer()
+                        Button(action: {}, label: {
+                            Image(systemName: "flag.fill")
+                        })
+                    }.padding(20).foregroundColor(.white)
+                }.frame(maxWidth: UIScreen.main.bounds.width)
+                HStack{
+                    LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.clear]), startPoint: .leading, endPoint: .trailing)
+                        .frame(width: 100)
+                        .onTapGesture {
+                            if person.index ?? 0 > 0{
+                                person.index! -= 1
+                            }
+                        }
                     Spacer()
-                    Button(action: {}, label: {
-                        Image(systemName: "flag.fill")
-                    })
-                }.padding(20).foregroundColor(.white)
-            }.frame(maxWidth: UIScreen.main.bounds.width)
-            HStack{
-                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.clear]), startPoint: .leading, endPoint: .trailing)
-                    .frame(width: 100)
-                    .onTapGesture {
-                        if person.index ?? 0 > 0{
-                            person.index! -= 1
+                    LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.01)]), startPoint: .leading, endPoint: .trailing)
+                        .frame(width: 100)
+                        .opacity(0.01)
+                        .onTapGesture {
+                            if person.index ?? 0 < (person.images?.count ?? 0) - 1{
+                                person.index! += 1
+                            }
                         }
-                    }
-                Spacer()
-                LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.01)]), startPoint: .leading, endPoint: .trailing)
-                    .frame(width: 100)
-                    .opacity(0.01)
-                    .onTapGesture {
-                        if person.index ?? 0 < (person.images?.count ?? 0) - 1{
-                            person.index! += 1
-                        }
-                    }
-            }.frame(maxWidth: UIScreen.main.bounds.width)
+                }.frame(maxWidth: UIScreen.main.bounds.width)
+            }
+            
+            Group{
+                Text("😍")
+                    .opacity(Double((person.x ?? 0)/10 - 1))
+                Text("😢")
+                    .opacity(Double((person.x ?? 0)/10 * -1 - 1))
+            }.font(.system(size: 56))
         }.onAppear(){
             person.index = 0
         }
@@ -121,14 +117,5 @@ struct SwapCard: View {
     func birth(date: String) -> String{
         let ageComponents = Calendar.current.dateComponents([.year], from: date.toDateNodeTS(), to: Date())
         return String(ageComponents.year!)
-    }
-}
-
-struct SwapCard_Previews: PreviewProvider {
-    static var previews: some View {
-        SwapCard(person: Card(images: ["https://i.pinimg.com/originals/95/86/bf/9586bfc989985ce947a687e43da3d419.jpg",
-                                       "https://cf.girlsaskguys.com/a26913/276aa246-a97e-4a8f-b0fa-7ecc17f3185e.jpg",
-                                       "https://placeimg.com/768/1024/people"], _id: "5fe8cf814ef1445812360b51", username: "rosie34", name: "Rosie", email: "torrey.heller98@hotmail.com", birthDate: "1999-08-03T04:48:14.714Z", gender: 1, lookingFor: 0))
-            .previewDevice("iPhone 12 Pro")
     }
 }

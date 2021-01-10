@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //

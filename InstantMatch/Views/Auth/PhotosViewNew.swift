@@ -89,12 +89,15 @@ struct PhotosViewNew: View {
                             photos.append(UserImages(imageUrl: photo.image, base64:nil))
                         }
                     }
-                    authVM.postPhotos(images: photos) { photos in
-                        self.user?.images = photos
-                        try? UserDefaults.standard.setCustomObject(user, forKey: "user")
+                    authVM.postPhotos(images: photos) { _ in
                         SDImageCache.shared.clearMemory()
                         SDImageCache.shared.clearDisk()
-                        self.presentationMode.wrappedValue.dismiss()
+                        if authVM.showPhotoUpload {
+                            self.authVM.showPhotoUpload = false
+                            self.authVM.loggedIn = true
+                        }else{
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     }
                 }, label: {
                     if self.authVM.photoStatus == .loading{
@@ -128,18 +131,20 @@ struct PhotosViewNew: View {
                     .clipShape(CustomShape())
                     .frame(height: UIScreen.main.bounds.height / 8, alignment: .center)
                     .scaleEffect(CGSize(width: 1.0, height: -1.0))
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    HStack(spacing:0){
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 21, weight: .medium))
-                            .padding(.trailing, 8)
-                        Text("Back")
+                if !authVM.showPhotoUpload{
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack(spacing:0){
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 21, weight: .medium))
+                                .padding(.trailing, 8)
+                            Text("Back")
+                        }
+                        .foregroundColor(Color(UIColor(named: "Light")!))
+                        .padding()
+                        .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                     }
-                    .foregroundColor(Color(UIColor(named: "Light")!))
-                    .padding()
-                    .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                 }
             }
         }.edgesIgnoringSafeArea(.top)

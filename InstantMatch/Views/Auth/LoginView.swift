@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 21.11.2020.
 //

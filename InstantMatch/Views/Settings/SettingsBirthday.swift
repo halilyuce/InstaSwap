@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SettingsBirthday: View {
     @Binding var user: User?
-    @State var birthday: Date = Date()
+    @State var birthday: Date = Calendar.current.date(byAdding: .year, value: -16, to: Date())!
+    let max = Calendar.current.date(byAdding: .year, value: -16, to: Date())!
     @State var error: Bool = false
     @ObservedObject var authVM : AuthVM = .shared
     @Environment(\.presentationMode) private var presentationMode
@@ -17,7 +18,7 @@ struct SettingsBirthday: View {
     var body: some View {
         Form {
             Section(header: Text("Birthday")) {
-                DatePicker(selection: $birthday, in: ...Date(), displayedComponents: .date) {
+                DatePicker(selection: $birthday, in: ...max, displayedComponents: .date) {
                     Text("Birthday:")
                         .foregroundColor(.gray)
                 }

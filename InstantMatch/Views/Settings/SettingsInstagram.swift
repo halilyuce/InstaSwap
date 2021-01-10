@@ -18,6 +18,7 @@ struct SettingsInstagram: View {
         Form {
             Section(header: Text("Instagram Username")) {
                 TextField("Username", text: $username)
+                .autocapitalization(.none)
             }
             
             Button {

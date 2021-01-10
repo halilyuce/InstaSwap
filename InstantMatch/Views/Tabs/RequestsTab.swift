@@ -1,6 +1,6 @@
 //
 //  RequestsTab.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -16,7 +16,7 @@ struct RequestsTab: View {
     var body: some View {
         NavigationView{
             ZStack{
-                if viewModel.notifications.count > 0 {
+                if viewModel.notificationStatus != .loading && viewModel.notifications.count > 0 {
                     List{
                         ForEach(viewModel.notifications, id:\.id){ notification in
                             HStack(alignment:.top){
@@ -88,8 +88,10 @@ struct RequestsTab: View {
                     .pullToRefresh(isShowing: self.$viewModel.loading) {
                         self.viewModel.loadMore()
                     }
-                }else{
-                    Text("Nothing to show!")
+                }
+                
+                if self.viewModel.notificationStatus == .done && viewModel.notifications.count == 0{
+                    NoDataView()
                 }
                 
                 if self.viewModel.notificationStatus == .loading{

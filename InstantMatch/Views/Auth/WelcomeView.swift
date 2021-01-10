@@ -9,61 +9,70 @@ import SwiftUI
 
 struct WelcomeView: View {
     
-    @Binding var sign: Bool
+    @ObservedObject var authVM: AuthVM = .shared
+    @State var user: User? = try? UserDefaults.standard.customObject(forKey: "user")
     
     var body: some View {
         NavigationView{
-            VStack{
-                ZStack(alignment: .top){
-                    Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
-                    LottieView(name: "people", loop: true)
-                        .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
-                        .padding(.horizontal)
-                        .offset(y: 20)
-                        .scaleEffect(CGSize(width: 1.0, height: -1.0))
+            if authVM.showPhotoUpload {
+                if #available(iOS 14.0, *) {
+                    PhotosViewNew(user: $user)
+                } else {
+                    PhotosViewOld(user: $user)
                 }
-                .clipShape(CustomShape())
-                .scaleEffect(CGSize(width: 1.0, height: -1.0))
+            }else{
                 VStack{
-                    Text("InstantMatch")
-                        .fontWeight(.bold)
-                        .padding(.horizontal, 25)
-                        .padding(.vertical, 20)
-                        .font(.title)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text("Share your Instagram username with other people that you want")
-                        .foregroundColor(.gray)
-                        .padding(.horizontal, 40)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                    NavigationLink(destination: RegisterView()){
-                        Text("Register")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: UIScreen.main.bounds.width / 1.5)
-                            .frame(height: 50, alignment: .center)
-                            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                            .cornerRadius(6)
-                            .padding(25)
+                    ZStack(alignment: .top){
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
+                        LottieView(name: "people", loop: true)
+                            .frame(height: UIScreen.main.bounds.height / 2, alignment: .center)
+                            .padding(.horizontal)
+                            .offset(y: 20)
+                            .scaleEffect(CGSize(width: 1.0, height: -1.0))
                     }
-                    NavigationLink(destination: LoginView()){
-                        HStack{
-                            Text("Already have an account?")
-                                .foregroundColor(.gray)
-                            Text("Login here")
-                                .foregroundColor(.pink)
-                                .underline()
+                    .clipShape(CustomShape())
+                    .scaleEffect(CGSize(width: 1.0, height: -1.0))
+                    VStack{
+                        Text("InstantMatch")
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, 20)
+                            .font(.title)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text("Share your Instagram username with other people that you want")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 40)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                        NavigationLink(destination: RegisterView()){
+                            Text("Register")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: UIScreen.main.bounds.width / 1.5)
+                                .frame(height: 50, alignment: .center)
+                                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                                .cornerRadius(6)
+                                .padding(25)
+                        }
+                        NavigationLink(destination: LoginView()){
+                            HStack{
+                                Text("Already have an account?")
+                                    .foregroundColor(.gray)
+                                Text("Login here")
+                                    .foregroundColor(.pink)
+                                    .underline()
+                            }
                         }
                     }
-                }
-                .frame(height: UIScreen.main.bounds.height / 2.5, alignment: .center)
-                Spacer()
-            }.edgesIgnoringSafeArea(.top)
-            .navigationBarHidden(true)
+                    .frame(height: UIScreen.main.bounds.height / 2.5, alignment: .center)
+                    Spacer()
+                }.edgesIgnoringSafeArea(.top)
+                .navigationBarHidden(true)
+            }
         }.accentColor(Color(UIColor(named: "Light")!))
     }
 }

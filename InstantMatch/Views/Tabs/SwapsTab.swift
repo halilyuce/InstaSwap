@@ -1,6 +1,6 @@
 //
 //  SwapsTab.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -13,12 +13,14 @@ struct SwapsTab: View {
     
     var body: some View {
         ZStack{
-            if self.viewModel.cards.count > 0 {
+            if self.viewModel.status != .loading && self.viewModel.cards.count > 0 {
                 ForEach(viewModel.cards.reversed(), id: \._id){ person in
                     SwapCard(person: person)
                 }
-            }else{
-                Text("It's done!")
+            }
+            
+            if self.viewModel.status == .done && viewModel.cards.count == 0{
+                NoDataView()
             }
             
             if self.viewModel.status == .loading{
@@ -26,16 +28,16 @@ struct SwapsTab: View {
                     ActivityIndicatorView(isAnimating: .constant(true), style: .large)
                 }.frame(maxHeight: .infinity)
             }
-            
-            if self.viewModel.status == .parseError {
-                Text("An Error Occured!")
-            }
         }
         .zIndex(1.0)
         .onAppear(){
             if viewModel.cards.count == 0 {
                 self.viewModel.loadCards()
             }
+        }
+        .alert(isPresented: .constant(self.viewModel.status == .parseError)) {
+            Alert(title: Text("An error occured!"), message: Text(viewModel.errorDesc), dismissButton: Alert.Button.default(
+                    Text("I got it")))
         }
     }
 }

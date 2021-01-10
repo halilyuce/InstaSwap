@@ -1,6 +1,6 @@
 //
 //  ViewModel.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -63,7 +63,9 @@ class ViewModel: ObservableObject {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                print("post swipe")
+                if self.cards.count == 0 {
+                    self.loadCards()
+                }
             case .failure(_):
                 print("error")
                 self.error.toggle()

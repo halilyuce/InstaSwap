@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  InstaSwap
+//  InstantMatch
 //
 //  Created by Halil Yuce on 15.11.2020.
 //
@@ -21,11 +21,10 @@ struct ContentView: View {
     
     @ObservedObject var authVM: AuthVM = .shared
     @ObservedObject var viewModel: ViewModel = .shared
-    @State var token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
     
     var body: some View {
         ZStack{
-            if token != "" || authVM.loggedIn {
+            if (authVM.token != "" && !authVM.showPhotoUpload) || authVM.loggedIn {
                 TabView(selection: self.$authVM.selectedTab) {
                     RequestsTab()
                         .tabItem {
@@ -47,9 +46,10 @@ struct ContentView: View {
                         }.tag(SelectedTab.settings)
                 }
             }else{
-                WelcomeView(sign: self.$authVM.loggedIn)
+                WelcomeView()
             }
-        }.onReceive(NotificationCenter.default.publisher(for: NSNotification.goNotification))
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.goNotification))
         { obj in
             let userInfo = obj.userInfo
             if let tapped = userInfo?["tapped"] as? Bool{

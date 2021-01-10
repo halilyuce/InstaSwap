@@ -12,6 +12,8 @@ struct RegisterView: View{
     @ObservedObject var authVM: AuthVM = .shared
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    let max = Calendar.current.date(byAdding: .year, value: -16, to: Date())!
+    
     var body: some View {
         ZStack(alignment: .top){
             ScrollView{
@@ -20,6 +22,8 @@ struct RegisterView: View{
                     .padding(.horizontal, 25)
                     .padding(.vertical, 20)
                     .font(.title)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                 TextField("Instagram Username", text: self.$authVM.register_username)
@@ -48,7 +52,7 @@ struct RegisterView: View{
                     .background(Color(UIColor.systemGray6))
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
-                DatePicker(selection: self.$authVM.register_birthday, in: ...Date(), displayedComponents: .date) {
+                DatePicker(selection: self.$authVM.register_birthday, in: ...max, displayedComponents: .date) {
                     Text("Birthday:")
                         .foregroundColor(.gray)
                 }.padding(.horizontal, 30).padding(.top, 10)
@@ -81,7 +85,7 @@ struct RegisterView: View{
                 Button(action: {
                     self.authVM.register()
                 }, label: {
-                    if self.authVM.status == .loading{
+                    if self.authVM.registerStatus == .loading{
                         ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
