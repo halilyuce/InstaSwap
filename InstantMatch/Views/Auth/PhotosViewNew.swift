@@ -10,7 +10,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 import SDWebImageSwiftUI
 
-struct GridData: Identifiable, Equatable {
+struct GridData: Identifiable, Equatable, Hashable {
     let id: String
     let image: String?
     var system: UIImage?
@@ -37,7 +37,7 @@ struct PhotosViewNew: View {
     @StateObject private var model = Model()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var dragging: GridData?
-    @State var imagePickerViewModel = ImagePickerViewModel()
+    @ObservedObject var imagePickerViewModel : ImagePickerViewModel = .shared
     @ObservedObject var authVM : AuthVM = .shared
     
     func convertImageToBase64(_ image: UIImage) -> String? {
@@ -53,17 +53,22 @@ struct PhotosViewNew: View {
                     ForEach(model.data) { d in
                         ZStack(alignment:.bottomTrailing){
                             GridItemView(d: d)
-                            Button {
-                                if let index = model.data.firstIndex(where: {$0.id == d.id}){
-                                    model.data.remove(at: index)
-                                }
-                            } label: {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(Color.red)
-                                    .font(.system(size: 21))
-                                    .padding(-5)
-                                    .background(Color.white)
-                            }.opacity(dragging != nil ? 0 : 1)
+                            if d.image != nil || d.system != nil{
+                                Button {
+                                    if let index = model.data.firstIndex(where: {$0.id == d.id}){
+                                        model.data.remove(at: index)
+                                    }
+                                    if (model.data.firstIndex(where: {$0.image == nil && $0.system == nil}) == nil){
+                                        self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+                                    }
+                                } label: {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(Color.red)
+                                        .font(.system(size: 21))
+                                        .padding(-5)
+                                        .background(Color.white)
+                                }.opacity(dragging != nil ? 0 : 1)
+                            }
                             
                         }
                         .overlay(dragging?.id == d.id ? Color.white.opacity(0.8) : Color.clear)
@@ -72,19 +77,6 @@ struct PhotosViewNew: View {
                             return NSItemProvider(object: String(d.id) as NSString)
                         }
                         .onDrop(of: [UTType.text], delegate: DragRelocateDelegate(item: d, listData: $model.data, current: $dragging))
-                    }
-                    if model.data.count < 6 {
-                        Button {
-                            self.imagePickerViewModel.isPresented.toggle()
-                        } label: {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color(UIColor.systemGray6))
-                                Image(systemName: "person.crop.circle.fill.badge.plus")
-                                    .font(.title)
-                                    .foregroundColor(Color(UIColor.systemGray3))
-                            }.frame(height: 150)
-                        }
                     }
                 }.animation(.default, value: model.data).padding(.top, UIScreen.main.bounds.height / 7)
                 Spacer()
@@ -147,22 +139,36 @@ struct PhotosViewNew: View {
                     }
                     .foregroundColor(Color(UIColor(named: "Light")!))
                     .padding()
-                    .padding(.top, UIScreen.main.bounds.width < 400 ? 20 : 40)
+                    .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                 }
             }
         }.edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $imagePickerViewModel.isPresented) {
-            ImagePickerView(model: self.$imagePickerViewModel)
+            ImagePickerView()
         }
         .onAppear(){
             for photo in user?.images ?? [] {
                 self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
             }
+            if self.model.data.count < 6 {
+                self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+            }
         }
         .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [UIImage]) -> Void in
             withAnimation {
-                for image in images {
-                    self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: image))
+                if self.model.data.count < 7 {
+                    for image in images {
+                        if let index = model.data.firstIndex(where: {$0.image == nil && $0.system == nil}){
+                            self.model.data.insert(GridData(id: UUID().uuidString, image: nil, system: image), at: index)
+                        }
+                    }
+                    if self.model.data.count == 7 {
+                        self.model.data.remove(at: self.model.data.count - 1)
+                    }else{
+                        if (model.data.firstIndex(where: {$0.image == nil && $0.system == nil}) == nil){
+                            self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+                        }
+                    }
                 }
             }
         }
@@ -201,19 +207,34 @@ struct DragRelocateDelegate: DropDelegate {
 
 struct GridItemView: View {
     var d: GridData
+    @ObservedObject var imagePickerViewModel : ImagePickerViewModel = .shared
     
     var body: some View {
-        if d.image != nil{
+        if d.image == nil && d.system == nil{
+            Button {
+                self.imagePickerViewModel.isPresented.toggle()
+            } label: {
+                ZStack{
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(UIColor.systemGray6))
+                    Image(systemName: "person.crop.circle.fill.badge.plus")
+                        .font(.title)
+                        .foregroundColor(Color(UIColor.systemGray3))
+                }.frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
+            }
+        }else if d.image != nil{
             WebImage(url: URL(string: d.image!)!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
+                .clipped()
                 .cornerRadius(10)
         }else{
             Image(uiImage: d.system!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
+                .clipped()
                 .cornerRadius(10)
         }
     }

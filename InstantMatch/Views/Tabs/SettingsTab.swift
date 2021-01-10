@@ -53,7 +53,7 @@ struct SettingsTab: View {
                         HStack{
                             Text("Gender")
                             Spacer()
-                            Text(user?.gender == 0 ? "Male" : user?.gender == 1 ? "Female" : "Other")
+                            Text(user?.gender == 0 ? "Male".localized : user?.gender == 1 ? "Female".localized : "Other".localized)
                                 .foregroundColor(.gray)
                         }
                     }
@@ -61,7 +61,7 @@ struct SettingsTab: View {
                         HStack{
                             Text("Looking for")
                             Spacer()
-                            Text(user?.lookingFor == 0 ? "Male" : user?.lookingFor == 1 ? "Female" : "Both")
+                            Text(user?.lookingFor == 0 ? "Male".localized : user?.lookingFor == 1 ? "Female".localized : "Both".localized)
                                 .foregroundColor(.gray)
                         }
                     }
@@ -70,7 +70,7 @@ struct SettingsTab: View {
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()
-                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
+                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
                                     .foregroundColor(.gray)
                             }
                         }
@@ -79,7 +79,7 @@ struct SettingsTab: View {
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()
-                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos" : "Photo")")
+                                Text("\(user?.images?.count ?? 0) \(user?.images?.count ?? 0 > 1 ? "Photos".localized : "Photo".localized)")
                                     .foregroundColor(.gray)
                             }
                         }

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Welcome
 struct WelcomeNotification: Codable{
-    let list: [Notification]
+    var list: [Notification]
 }
 
 // MARK: - Welcome
@@ -26,8 +26,7 @@ struct SuccessResponse: Codable{
 struct Notification: Codable {
     let id: String
     let user: User?
-    let notificationType: Int?
+    var notificationType: Int?
     let date: String?
-    
     var isshowed: Bool? = false
 }

@@ -58,7 +58,7 @@ struct SettingsLookingFor: View {
         .onAppear(){
             self.lookingFor = user?.lookingFor ?? 0
         }
-        .navigationBarTitle(Text("Looking For"), displayMode: .inline)
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .alert(isPresented: $error) {
             Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
                     Text("I got it")))

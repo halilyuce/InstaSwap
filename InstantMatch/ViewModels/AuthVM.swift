@@ -34,8 +34,8 @@ class AuthVM: ObservableObject {
     @Published var password: String = ""
     
     //  Register Inputs
-    let genders = ["MALE", "FEMALE", "OTHER"]
-    let lookingfor = ["MALE", "FEMALE", "BOTH"]
+    let genders = ["Male".localized, "Female".localized, "Other".localized]
+    let lookingfor = ["Male".localized, "Female".localized, "Both".localized]
     
     @Published var register_username: String = ""
     @Published var register_password: String = ""

@@ -10,7 +10,7 @@ import Combine
 
 struct ImagePickerView : UIViewControllerRepresentable {
 
-    @Binding var model: ImagePickerViewModel
+    @ObservedObject var model: ImagePickerViewModel = .shared
 
     typealias UIViewControllerType = UIImagePickerController
 
@@ -60,7 +60,12 @@ struct ImagePickerView : UIViewControllerRepresentable {
 
 }
 
-struct ImagePickerViewModel {
-    var isPresented: Bool = false
-    let pickedImagesSubject: PassthroughSubject<[UIImage], Never>! = PassthroughSubject<[UIImage], Never>()
+class ImagePickerViewModel: ObservableObject {
+    @Published var isPresented: Bool = false
+    @Published var pickedImagesSubject: PassthroughSubject<[UIImage], Never>! = PassthroughSubject<[UIImage], Never>()
+    
+    private init() { }
+    
+    static let shared = ImagePickerViewModel()
+    
 }

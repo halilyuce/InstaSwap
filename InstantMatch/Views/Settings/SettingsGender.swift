@@ -16,7 +16,7 @@ struct SettingsGender: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Your Gender")) {
+            Section(header: Text("Gender")) {
                 HStack{
                     Text("Gender:")
                         .foregroundColor(.gray)
@@ -56,7 +56,7 @@ struct SettingsGender: View {
         .onAppear(){
             self.gender = user?.gender ?? 0
         }
-        .navigationBarTitle(Text("Your Gender"), displayMode: .inline)
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .alert(isPresented: $error) {
             Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
                     Text("I got it")))

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		900AE84D25AA4EBF006D1438 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D092598E168008CA77B /* Login.swift */; };
 		900AE86225AA5417006D1438 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 900AE86525AA5417006D1438 /* Localizable.strings */; };
 		900AE86325AA5417006D1438 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 900AE86525AA5417006D1438 /* Localizable.strings */; };
+		905D763A25AB15DA00FB38D7 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 905D763925AB15DA00FB38D7 /* SwiftUIRefresh */; };
+		905D763E25AB229B00FB38D7 /* UIGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905D763D25AB229B00FB38D7 /* UIGrid.swift */; };
 		90710D042598DFDA008CA77B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D032598DFDA008CA77B /* HTTPManager.swift */; };
 		90710D072598E01B008CA77B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D062598E01B008CA77B /* APIManager.swift */; };
 		90710D0A2598E168008CA77B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90710D092598E168008CA77B /* Login.swift */; };
@@ -90,6 +92,7 @@
 		900AE84225AA4394006D1438 /* Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notifications.entitlements; sourceTree = "<group>"; };
 		900AE86425AA5417006D1438 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		900AE86825AA542A006D1438 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		905D763D25AB229B00FB38D7 /* UIGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGrid.swift; sourceTree = "<group>"; };
 		90710D032598DFDA008CA77B /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		90710D062598E01B008CA77B /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		90710D092598E168008CA77B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905D763A25AB15DA00FB38D7 /* SwiftUIRefresh in Frameworks */,
 				4882888C29D6D65C199C4E13 /* Pods_InstantMatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +268,7 @@
 				90D10808256AB366006F596A /* ImagePicker.swift */,
 				90D1351025A1F65E00D6D76A /* ActivityIndicator.swift */,
 				9001FB0B25A326EE003C2313 /* NotificationButtons.swift */,
+				905D763D25AB229B00FB38D7 /* UIGrid.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -368,6 +373,9 @@
 				900AE83A25AA4353006D1438 /* PBXTargetDependency */,
 			);
 			name = InstantMatch;
+			packageProductDependencies = (
+				905D763925AB15DA00FB38D7 /* SwiftUIRefresh */,
+			);
 			productName = InstaSwap;
 			productReference = 909537C725615BA4007AF01C /* InstantMatch.app */;
 			productType = "com.apple.product-type.application";
@@ -399,6 +407,9 @@
 				tr,
 			);
 			mainGroup = 909537BE25615BA4007AF01C;
+			packageReferences = (
+				905D763825AB15DA00FB38D7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+			);
 			productRefGroup = 909537C825615BA4007AF01C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -522,6 +533,7 @@
 				909537F825615CF5007AF01C /* SwapsTab.swift in Sources */,
 				90710D042598DFDA008CA77B /* HTTPManager.swift in Sources */,
 				90710D072598E01B008CA77B /* APIManager.swift in Sources */,
+				905D763E25AB229B00FB38D7 /* UIGrid.swift in Sources */,
 				90CBE9F825A3AFC100284877 /* SettingsInstagram.swift in Sources */,
 				90F0659525699DDB00055F66 /* LoginView.swift in Sources */,
 				909537F025615C19007AF01C /* LottieView.swift in Sources */,
@@ -804,6 +816,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		905D763825AB15DA00FB38D7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUIRefresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		905D763925AB15DA00FB38D7 /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 905D763825AB15DA00FB38D7 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 909537BF25615BA4007AF01C /* Project object */;
 }

@@ -28,6 +28,15 @@ class ViewModel: ObservableObject {
     @Published var loadStatus = LoadMoreStatus.ready(nextPage: 0)
     @Published var lastPage:Int? = nil
     
+    @Published var loading: Bool = false {
+        didSet {
+            if oldValue == false && loading == true {
+                self.loadStatus = .ready(nextPage: 0)
+                self.loadMore()
+            }
+        }
+    }
+    
     private init() { }
     
     static let shared = ViewModel()
@@ -87,9 +96,11 @@ class ViewModel: ObservableObject {
                     self.lastPage = page
                 }
                 self.parseFromResponse(data: result.list, error: nil)
+                self.loading = false
             case .failure(let err):
                 print("error")
                 self.notificationStatus = .parseError
+                self.loading = false
                 self.error.toggle()
                 self.errorDesc = err.localizedDescription
             }

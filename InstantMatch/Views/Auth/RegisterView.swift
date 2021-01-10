@@ -29,7 +29,7 @@ struct RegisterView: View{
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
                     .padding(.bottom, 10)
-                TextField("Full Name", text: self.$authVM.register_name)
+                TextField("Name", text: self.$authVM.register_name)
                     .padding(12)
                     .background(Color(UIColor.systemGray6))
                     .mask(RoundedRectangle(cornerRadius: 8))
@@ -49,7 +49,7 @@ struct RegisterView: View{
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
                 DatePicker(selection: self.$authVM.register_birthday, in: ...Date(), displayedComponents: .date) {
-                    Text("Select Birthday:")
+                    Text("Birthday:")
                         .foregroundColor(.gray)
                 }.padding(.horizontal, 30).padding(.top, 10)
                 HStack{
@@ -65,11 +65,13 @@ struct RegisterView: View{
                     .pickerStyle(SegmentedPickerStyle())
                 }.padding(.horizontal, 30).padding(.vertical, 10)
                 HStack{
-                    Text("Lookin for:")
+                    Text("Looking For:")
                         .foregroundColor(.gray)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                         .frame(width:90, alignment: .leading)
                     Spacer()
-                    Picker(selection: self.$authVM.register_lookingfor, label: Text("Lookin for:")) {
+                    Picker(selection: self.$authVM.register_lookingfor, label: Text("Looking For:")) {
                         ForEach(0 ..< self.authVM.lookingfor.count) {
                             Text(self.authVM.lookingfor[$0]).tag($0)
                         }
@@ -128,13 +130,13 @@ struct RegisterView: View{
                         Text("Back")
                     }
                     .padding()
-                    .padding(.top, UIScreen.main.bounds.width < 400 ? 20 : 40)
+                    .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                 }
             }
         }.edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
         .alert(isPresented: .constant(authVM.error && authVM.errorType == "Register")) {
-            Alert(title: Text("An error occured"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
+            Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
                 Text("I got it"), action: { self.authVM.error = false }
             ))
         }

@@ -45,7 +45,7 @@ struct SettingsInstagram: View {
         .onAppear(){
             self.username = user?.username ?? ""
         }
-        .navigationBarTitle(Text("Instagram Username"), displayMode: .inline)
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .alert(isPresented: $error) {
             Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
                     Text("I got it")))

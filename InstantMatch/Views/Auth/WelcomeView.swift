@@ -68,14 +68,6 @@ struct WelcomeView: View {
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView(sign: .constant(false))
-            .preferredColorScheme(.dark)
-            .previewDevice("iPhone 12 Pro")
-    }
-}
-
 struct CustomShape : Shape {
     
     func path(in rect: CGRect) -> Path {

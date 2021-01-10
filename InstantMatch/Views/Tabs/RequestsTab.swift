@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUIRefresh
 
 struct RequestsTab: View {
     
@@ -37,6 +38,9 @@ struct RequestsTab: View {
                                         if notification.notificationType ?? 0 == 1{
                                             Button(action: {
                                                 viewModel.postNotification(id: notification.id, type: 3)
+                                                if let index = viewModel.notifications.firstIndex(where: {$0.id == notification.id}){
+                                                    viewModel.notifications[index].notificationType = 3
+                                                }
                                             }, label: {
                                                 Text("No, thanks")
                                                     .font(.system(size: 15))
@@ -51,6 +55,9 @@ struct RequestsTab: View {
                                             Spacer(minLength: 20)
                                             Button(action: {
                                                 viewModel.postNotification(id: notification.id, type: 2)
+                                                if let index = viewModel.notifications.firstIndex(where: {$0.id == notification.id}){
+                                                    viewModel.notifications[index].notificationType = 2
+                                                }
                                             }, label: {
                                                 Text("Yes, sure")
                                                     .font(.system(size: 15))
@@ -78,6 +85,9 @@ struct RequestsTab: View {
                             }
                         }
                     }.listStyle(PlainListStyle())
+                    .pullToRefresh(isShowing: self.$viewModel.loading) {
+                        self.viewModel.loadMore()
+                    }
                 }else{
                     Text("Nothing to show!")
                 }
@@ -88,9 +98,6 @@ struct RequestsTab: View {
                     }.frame(maxHeight: .infinity)
                 }
                 
-                if self.viewModel.notificationStatus == .parseError {
-                    Text("An Error Occured!")
-                }
             }.onAppear(){
                 if viewModel.notifications.count == 0 {
                     self.viewModel.loadMore()
@@ -98,6 +105,10 @@ struct RequestsTab: View {
             }
             .navigationBarTitle(Text("Requests"))
         }.phoneOnlyStackNavigationView()
+        .alert(isPresented: .constant(self.viewModel.notificationStatus == .parseError)) {
+            Alert(title: Text("An error occured!"), message: Text(viewModel.errorDesc), dismissButton: Alert.Button.default(
+                    Text("I got it")))
+        }
     }
     
     func desc(type:Int) -> String {

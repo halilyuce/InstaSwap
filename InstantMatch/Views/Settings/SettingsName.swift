@@ -17,8 +17,8 @@ struct SettingsName: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Your Name")) {
-                TextField("Full Name", text: $name)
+            Section(header: Text("Name")) {
+                TextField("Name", text: $name)
             }
             
             Button {
@@ -46,7 +46,7 @@ struct SettingsName: View {
         .onAppear(){
             self.name = user?.name ?? ""
         }
-        .navigationBarTitle(Text("Your Name"), displayMode: .inline)
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .alert(isPresented: $error) {
             Alert(title: Text("An error occured!"), message: Text(authVM.errorDesc), dismissButton: Alert.Button.default(
                     Text("I got it")))

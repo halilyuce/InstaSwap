@@ -143,7 +143,7 @@ class ApiManager {
         let url = baseURL + notificationsURL
         let params =  ["notificationId": id, "type": type] as [String : Any]
         
-        HttpManager.shared.post(URL(string: url)!, parameters: params) { result in
+        HttpManager.shared.patch(URL(string: url)!, token: nil, parameters: params) { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async { completion(.failure(error)) }
