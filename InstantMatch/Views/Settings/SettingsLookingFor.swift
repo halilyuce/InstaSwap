@@ -54,7 +54,7 @@ struct SettingsLookingFor: View {
                         .frame(maxWidth: .infinity)
                 }
             }.listRowBackground(Color.pink)
-        }
+        }.modifier(GroupedListModifier())
         .onAppear(){
             self.lookingFor = user?.lookingFor ?? 0
         }

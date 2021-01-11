@@ -152,11 +152,13 @@ struct PhotosViewNew: View {
             ImagePickerView()
         }
         .onAppear(){
-            for photo in user?.images ?? [] {
-                self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
-            }
-            if self.model.data.count < 6 {
-                self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+            if model.data.count == 0 {
+                for photo in user?.images ?? [] {
+                    self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
+                }
+                if self.model.data.count < 6 {
+                    self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+                }
             }
         }
         .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [UIImage]) -> Void in
@@ -225,21 +227,19 @@ struct GridItemView: View {
                     Image(systemName: "person.crop.circle.fill.badge.plus")
                         .font(.title)
                         .foregroundColor(Color(UIColor.systemGray3))
-                }.frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
+                }.frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
             }
         }else if d.image != nil{
             WebImage(url: URL(string: d.image!)!)
                 .resizable()
                 .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
-                .clipped()
+                .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
                 .cornerRadius(10)
         }else{
             Image(uiImage: d.system!)
                 .resizable()
                 .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width / 3.6, height: 150, alignment: .center)
-                .clipped()
+                .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
                 .cornerRadius(10)
         }
     }

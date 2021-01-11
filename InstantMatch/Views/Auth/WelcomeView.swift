@@ -73,7 +73,7 @@ struct WelcomeView: View {
                 }.edgesIgnoringSafeArea(.top)
                 .navigationBarHidden(true)
             }
-        }.accentColor(Color(UIColor(named: "Light")!))
+        }.accentColor(Color(UIColor(named: "Light")!)).phoneOnlyStackNavigationView()
     }
 }
 

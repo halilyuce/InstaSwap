@@ -9,10 +9,17 @@ import SwiftUI
 
 struct RegisterView: View{
     
+    @State var showsDatePicker = false
     @ObservedObject var authVM: AuthVM = .shared
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let max = Calendar.current.date(byAdding: .year, value: -16, to: Date())!
+    
+    let dateFormatter: DateFormatter = {
+          let df = DateFormatter()
+          df.dateStyle = .medium
+          return df
+      }()
     
     var body: some View {
         ZStack(alignment: .top){
@@ -52,10 +59,32 @@ struct RegisterView: View{
                     .background(Color(UIColor.systemGray6))
                     .mask(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, 30)
-                DatePicker(selection: self.$authVM.register_birthday, in: ...max, displayedComponents: .date) {
-                    Text("Birthday:")
-                        .foregroundColor(.gray)
-                }.padding(.horizontal, 30).padding(.top, 10)
+                if #available(iOS 14.0, *){
+                    DatePicker(selection: self.$authVM.register_birthday, in: ...max, displayedComponents: .date) {
+                        Text("Birthday:")
+                            .foregroundColor(.gray)
+                    }.padding(.horizontal, 30).padding(.top, 10)
+                }else{
+                    HStack {
+                        Text("Birthday:")
+                            .foregroundColor(.gray)
+                            .frame(width:90, alignment: .leading)
+                        Spacer()
+                        Text("\(dateFormatter.string(from: self.authVM.register_birthday))")
+                            .onTapGesture {
+                                self.showsDatePicker.toggle()
+                            }
+                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                            .background(showsDatePicker
+                                            ? Color.clear
+                                            : Color(UIColor.systemGray6))
+                            .cornerRadius(6)
+                    }.padding(.horizontal, 30).padding(.top, 10)
+                    if showsDatePicker {
+                        DatePicker("", selection: self.$authVM.register_birthday, in: ...max, displayedComponents: .date)
+                            .datePickerStyle(WheelDatePickerStyle()).labelsHidden()
+                    }
+                }
                 HStack{
                     Text("Gender:")
                         .foregroundColor(.gray)
@@ -124,17 +153,19 @@ struct RegisterView: View{
                     .clipShape(CustomShape())
                     .frame(height: UIScreen.main.bounds.height / 8, alignment: .center)
                     .scaleEffect(CGSize(width: 1.0, height: -1.0))
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    HStack(spacing:0){
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 21, weight: .medium))
-                            .padding(.trailing, 8)
-                        Text("Back")
+                if #available(iOS 14.0, *) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack(spacing:0){
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 21, weight: .medium))
+                                .padding(.trailing, 8)
+                            Text("Back")
+                        }
+                        .padding()
+                        .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                     }
-                    .padding()
-                    .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                 }
             }
         }.edgesIgnoringSafeArea(.top)

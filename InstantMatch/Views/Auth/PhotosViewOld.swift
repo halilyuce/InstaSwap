@@ -117,7 +117,7 @@ struct PhotosViewOld: View {
                         .foregroundColor(Color(UIColor(named: "Light")!))
                         .padding()
                         .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
-                    }
+                    }.buttonStyle(PlainButtonStyle())
                 }
             }
         }.frame(width: UIScreen.main.bounds.width, alignment: .center).edgesIgnoringSafeArea(.top)
@@ -125,11 +125,13 @@ struct PhotosViewOld: View {
             ImagePickerView()
         }
         .onAppear(){
-            for photo in user?.images ?? [] {
-                self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
-            }
-            if self.model.data.count < 6 {
-                self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+            if model.data.count == 0 {
+                for photo in user?.images ?? [] {
+                    self.model.data.append(GridData(id: UUID().uuidString, image: photo, system: nil))
+                }
+                if self.model.data.count < 6 {
+                    self.model.data.append(GridData(id: UUID().uuidString, image: nil, system: nil))
+                }
             }
         }
         .onReceive(imagePickerViewModel.pickedImagesSubject) { (images: [UIImage]) -> Void in
@@ -150,6 +152,7 @@ struct PhotosViewOld: View {
                 }
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarHidden(true)
     }
 }

@@ -74,7 +74,7 @@ struct SettingsTab: View {
                             }
                         }
                     } else {
-                        NavigationLink(destination:PhotosViewOld(user: $authVM.user), tag: 5, selection: $selection){
+                        NavigationLink(destination:PhotosViewOld(user: $authVM.user).navigationBarBackButtonHidden(true), tag: 5, selection: $selection){
                             HStack{
                                 Text("Edit Photos")
                                 Spacer()

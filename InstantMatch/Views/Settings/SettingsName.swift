@@ -42,7 +42,7 @@ struct SettingsName: View {
                         .frame(maxWidth: .infinity)
                 }
             }.listRowBackground(Color.pink)
-        }
+        }.modifier(GroupedListModifier())
         .onAppear(){
             self.name = user?.name ?? ""
         }

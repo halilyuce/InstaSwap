@@ -42,7 +42,7 @@ struct SettingsInstagram: View {
                         .frame(maxWidth: .infinity)
                 }
             }.listRowBackground(Color.pink)
-        }
+        }.modifier(GroupedListModifier())
         .onAppear(){
             self.username = user?.username ?? ""
         }

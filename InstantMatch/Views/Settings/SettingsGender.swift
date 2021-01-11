@@ -52,7 +52,7 @@ struct SettingsGender: View {
                         .frame(maxWidth: .infinity)
                 }
             }.listRowBackground(Color.pink)
-        }
+        }.modifier(GroupedListModifier())
         .onAppear(){
             self.gender = user?.gender ?? 0
         }

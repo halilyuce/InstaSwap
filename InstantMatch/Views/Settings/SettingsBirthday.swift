@@ -45,7 +45,7 @@ struct SettingsBirthday: View {
                         .frame(maxWidth: .infinity)
                 }
             }.listRowBackground(Color.pink)
-        }
+        }.modifier(GroupedListModifier())
         .onAppear(){
             self.birthday = (user?.birthDate ?? "").toDateNodeTS()
         }

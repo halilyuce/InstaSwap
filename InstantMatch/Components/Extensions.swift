@@ -409,3 +409,13 @@ extension String {
         }
     }
 }
+
+extension Color {
+    static var accent: Color {
+        if #available(iOS 14.0, *) {
+            return accentColor
+        } else {
+            return Color(UIColor.systemPink)
+        }
+    }
+}
