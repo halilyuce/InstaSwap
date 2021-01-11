@@ -22,9 +22,9 @@ class Model: ObservableObject {
     @Published var data = [GridData]()
     
     let columns = [
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120))
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
     ]
 }
 
@@ -217,30 +217,35 @@ struct GridItemView: View {
     @ObservedObject var imagePickerViewModel : ImagePickerViewModel = .shared
     
     var body: some View {
-        if d.image == nil && d.system == nil{
-            Button {
-                self.imagePickerViewModel.isPresented.toggle()
-            } label: {
-                ZStack{
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(UIColor.systemGray6))
-                    Image(systemName: "person.crop.circle.fill.badge.plus")
-                        .font(.title)
-                        .foregroundColor(Color(UIColor.systemGray3))
-                }.frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
+            if d.image == nil && d.system == nil{
+                Button {
+                    self.imagePickerViewModel.isPresented.toggle()
+                } label: {
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color(UIColor.systemGray6))
+                        Image(systemName: "person.crop.circle.fill.badge.plus")
+                            .font(.title)
+                            .foregroundColor(Color(UIColor.systemGray3))
+                    }
+                    .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5)
+                }
+            }else if d.image != nil{
+                WebImage(url: URL(string: d.image!)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5)
+                    .clipped()
+                    .cornerRadius(10)
+                    .contentShape(RoundedRectangle(cornerRadius: 10))
+            }else{
+                Image(uiImage: d.system!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5)
+                    .clipped()
+                    .cornerRadius(10)
+                    .contentShape(RoundedRectangle(cornerRadius: 10))
             }
-        }else if d.image != nil{
-            WebImage(url: URL(string: d.image!)!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
-                .cornerRadius(10)
-        }else{
-            Image(uiImage: d.system!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width / 3.6, height: UIScreen.main.bounds.width / 2.5, alignment: .center)
-                .cornerRadius(10)
-        }
     }
 }

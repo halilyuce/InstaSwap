@@ -48,7 +48,7 @@ struct ContentView: View {
             }else{
                 WelcomeView()
             }
-        }.accentColor(.accent)
+        }.accentColor(Color(UIColor.systemPink))
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.goNotification))
         { obj in
             let userInfo = obj.userInfo
