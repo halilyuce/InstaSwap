@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct SwapCard: View {
     
     @State var person: Card
+    @State var showAlert: Bool = false
     @ObservedObject var viewModel: ViewModel = .shared
     
     var body: some View {
@@ -32,18 +33,6 @@ struct SwapCard: View {
                         }
                     }.padding().frame(maxWidth: UIScreen.main.bounds.width)
                 }
-                VStack(alignment: .leading){
-                    Spacer()
-                    HStack{
-                        Text("\(person.name ?? ""), \(birth(date: person.birthDate ?? ""))")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Button(action: {}, label: {
-                            Image(systemName: "flag.fill")
-                        })
-                    }.padding(20).foregroundColor(.white)
-                }.frame(maxWidth: UIScreen.main.bounds.width)
                 HStack{
                     LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.01), Color.clear]), startPoint: .leading, endPoint: .trailing)
                         .frame(width: 100)
@@ -70,6 +59,24 @@ struct SwapCard: View {
                 Text("😢")
                     .opacity(Double((person.x ?? 0)/10 * -1 - 1))
             }.font(.system(size: 56))
+            
+            
+            VStack(alignment: .leading){
+                Spacer()
+                HStack{
+                    Text("\(person.name ?? ""), \(birth(date: person.birthDate ?? ""))")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Button(action: {
+                        self.showAlert.toggle()
+                    }, label: {
+                        Image(systemName: "flag.fill")
+                    })
+                }.padding(20).foregroundColor(.white)
+            }.frame(maxWidth: UIScreen.main.bounds.width)
+            
+            
         }.onAppear(){
             person.index = 0
         }
@@ -112,6 +119,11 @@ struct SwapCard: View {
                     }
                 }
         )
+        .actionSheet(isPresented: self.$showAlert) {
+            ActionSheet(title: Text("Report user or content"), message: Text("If there is a disturbing situation in these images or user, you can apply the following ways to complain."), buttons: [.destructive(Text("Report this user/content"), action: {self.viewModel.reportUser(id: person._id ?? "") { (success) in
+                print(success)
+            }}), .cancel(Text("Cancel"))])
+        }
     }
     
     func birth(date: String) -> String{

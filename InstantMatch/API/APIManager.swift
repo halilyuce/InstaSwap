@@ -17,6 +17,7 @@ class ApiManager {
     let registerURL = "user/register"
     let doubletakeURL = "main/doubleTake"
     let postSwipeURL = "main/postSwipe"
+    let reportUserURL = "main/report"
     let notificationsURL = "notifications"
     let settingsUserURL = "settings/user"
     let photosURL = "settings/postPhotos"
@@ -226,6 +227,23 @@ class ApiManager {
         let url = baseURL + settingsUserURL
         
         HttpManager.shared.delete(URL(string: url)!, token: nil) { result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async { completion(.failure(error)) }
+                
+            case .success(_):
+                DispatchQueue.main.async { completion(.success(true)) }
+            }
+        }
+    }
+    
+    func reportUser(id:String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let url = baseURL + reportUserURL
+        
+        let params =  ["userId": id] as [String : Any]
+        
+        HttpManager.shared.post(URL(string: url)!, parameters: params) { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async { completion(.failure(error)) }

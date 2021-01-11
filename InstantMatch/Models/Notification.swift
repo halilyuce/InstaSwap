@@ -24,9 +24,9 @@ struct SuccessResponse: Codable{
 
 // MARK: - List
 struct Notification: Codable {
-    let id: String
-    let user: User?
+    var id: String
+    var user: User?
     var notificationType: Int?
-    let date: String?
+    var date: String?
     var isshowed: Bool? = false
 }

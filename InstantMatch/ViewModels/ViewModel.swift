@@ -22,6 +22,7 @@ class ViewModel: ObservableObject {
     
     @Published var cards = [Card]()
     @Published var status = Status.ready
+    @Published var reportStatus = Status.ready
     
     @Published var notifications = [Notification]()
     @Published var notificationStatus = Status.ready
@@ -74,6 +75,25 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func reportUser(id:String, completion: @escaping (Bool) -> Void){
+        self.reportStatus = .loading
+        ApiManager.shared.reportUser(id: id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.reportStatus = .done
+                DispatchQueue.main.async { completion(true) }
+            case .failure(_):
+                print("error report user")
+                self.reportStatus = .parseError
+                DispatchQueue.main.async { completion(false) }
+                self.error.toggle()
+                self.errorDesc = NSLocalizedString("Please try again.", comment: "")
+                self.errorType = "Report"
+            }
+        }
+    }
+    
     func postNotification(id:String, type:Int){
         ApiManager.shared.patchNotification(id: id, type: type) { [weak self] result in
             guard let self = self else { return }
@@ -94,9 +114,6 @@ class ViewModel: ObservableObject {
             guard let self = self else { return }
             switch result {
             case .success(let result):
-                if result.list.count == 0 {
-                    self.lastPage = page
-                }
                 self.parseFromResponse(data: result.list, error: nil)
                 self.loading = false
             case .failure(let err):
@@ -133,16 +150,7 @@ class ViewModel: ObservableObject {
             notificationStatus = .loading
         }
         loadStatus = .loading(page: page)
-        if (lastPage != nil){
-            if self.lastPage! >= page{
-                getNotifications(page: page)
-            }else{
-                loadStatus = .done
-                self.notificationStatus = .done
-            }
-        }else{
-            getNotifications(page: page)
-        }
+        getNotifications(page: page)
     }
     
     func parseFromResponse(data: [Notification]?, error: Error?) {
@@ -174,6 +182,19 @@ class ViewModel: ObservableObject {
                 for notification in data!.reversed() {
                     if !self.notifications.contains(where: { $0.id == notification.id }){
                         self.notifications.insert(notification, at: 0)
+                    }else{
+                        self.notifications = self.notifications.map { (eachData) -> Notification in
+                            var data = eachData
+                            if data.id == notification.id {
+                                data.notificationType = notification.notificationType
+                                data.date = notification.date
+                                data.isshowed = true
+                                data.user = notification.user
+                                return data
+                            }else {
+                                return eachData
+                            }
+                        }
                     }
                 }
             }
