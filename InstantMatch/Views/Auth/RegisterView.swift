@@ -147,27 +147,33 @@ struct RegisterView: View{
                     }
                 }.padding(.bottom)
             }.frame(maxHeight: .infinity).padding(.top, UIScreen.main.bounds.height / 8)
-            ZStack(alignment: .topLeading){
-                Rectangle()
-                    .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
-                    .clipShape(CustomShape())
-                    .frame(height: UIScreen.main.bounds.height / 8, alignment: .center)
-                    .scaleEffect(CGSize(width: 1.0, height: -1.0))
-                if #available(iOS 14.0, *) {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        HStack(spacing:0){
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 21, weight: .medium))
-                                .padding(.trailing, 8)
-                            Text("Back")
+            ZStack(alignment: .bottomLeading){
+                GeometryReader{ geo in
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(hexString: "#fa7e1e")), Color(UIColor(hexString: "#d62976")), Color(UIColor(hexString: "#962fbf")), Color(UIColor(hexString: "#4f5bd5"))]), startPoint: .bottomTrailing, endPoint: .topLeading))
+                        .clipShape(CustomShape())
+                        .frame(height: UIScreen.main.bounds.height / 8, alignment: .center)
+                        .scaleEffect(CGSize(width: 1.0, height: -1.0))
+                    if !authVM.showPhotoUpload{
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            VStack{
+                                Spacer()
+                                HStack(spacing:0){
+                                    Image(systemName: "chevron.left")
+                                        .font(.system(size: 21, weight: .medium))
+                                        .padding(.trailing, 8)
+                                    Text("Back")
+                                }
+                            }
+                            .foregroundColor(Color(UIColor(named: "Light")!))
+                            .padding()
+                            .padding(.bottom)
                         }
-                        .padding()
-                        .padding(.top, UIScreen.main.bounds.width < 375 ? 20 : 40)
                     }
                 }
-            }
+            }.frame(height: UIScreen.main.bounds.height / 8, alignment: .center)
         }.edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
         .alert(isPresented: .constant(authVM.error && authVM.errorType == "Register")) {

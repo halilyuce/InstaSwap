@@ -348,11 +348,14 @@ struct LazyImage: View, Equatable {
     let url: URL
     
     var body: some View{
+        GeometryReader { geometry in
         WebImage(url: url)
             .resizable()
-            .scaledToFill()
-            .frame(maxWidth: UIScreen.main.bounds.width)
+            .aspectRatio(contentMode: .fill)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (geometry.safeAreaInsets.top + geometry.safeAreaInsets.bottom) )
             .clipped()
+            .contentShape(Rectangle())
+        }
     }
 }
 

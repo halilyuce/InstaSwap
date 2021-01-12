@@ -604,6 +604,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Notifications/Notifications.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				INFOPLIST_FILE = Notifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -625,6 +626,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Notifications/Notifications.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				INFOPLIST_FILE = Notifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -768,6 +770,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InstantMatch/InstantMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"InstantMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
@@ -796,6 +799,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InstantMatch/InstantMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"InstantMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 24G3237JT8;
 				ENABLE_PREVIEWS = YES;

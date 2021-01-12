@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftUI
-import Bagel
+//import Bagel
 import Firebase
 import UserNotifications
 
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        Bagel.start()
+//        Bagel.start()
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
